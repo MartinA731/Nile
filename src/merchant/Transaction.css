@@ -1,0 +1,93 @@
+body {
+	margin: 0px;
+	background-color: #f2f7ff;
+	color: #4472c4;
+}
+
+/*
+generic button using span tag.
+Doesn't work for darker buttons(rgb less than 50)
+designed for button with innerhtml with 4-10char.
+*/
+span.button {
+	padding: 0.6em 1em;
+	background-color: rgb(
+		var(--r), var(--g), var(--b)
+	);
+	border-radius: 10%;
+  user-select: none;
+}
+
+span.button:hover {
+	background-color: rgb(
+		calc(var(--r) - 25),
+		calc(var(--g) - 25),
+		calc(var(--b) - 25)
+	);
+}
+
+span.button:active {
+	background-color: rgb(
+		calc(var(--r) - 50),
+		calc(var(--g) - 50),
+		calc(var(--b) - 50)
+	);
+}
+
+/* top bar ͏*/
+.topBar {
+	display: flex;
+	justify-content: space-between;
+	padding: 1vh 5vw;
+	background-color: white;
+	color: #003190;
+	font-size: 24px;
+}
+
+.topBar div {
+	display: flex;
+	align-items:center;
+}
+
+.topBar img {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+}
+.topBar .avatar {
+	border-radius: 50%;
+}
+
+/* placeholder */
+.placeholder {
+	margin: 3vh 5vw;
+}
+
+.placeholder h {
+  display: inline-block;
+  margin: 10px 0px;
+	font-size: 24px;
+}
+
+.placeholder .receiving {
+	float: right;
+  --r: 235;
+  --g: 133;
+  --b: 35;
+	color: white;
+}
+
+.placeholder .flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-container .box {
+  display: inline-block;
+	/* for now set to a ratio to the windows length or height, which ever is larger */
+	padding: 15vh 12vw;
+	margin: 2vh 2vw;
+	background-color: white;
+	font-size: 24px;
+	border-radius: 10%;
+}
