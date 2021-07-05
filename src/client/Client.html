@@ -14,23 +14,6 @@
 
 <body>
 
-	<button class="open-button" onclick="openForm()">Request Now</button>
-	
-	<div class="form-popup" id="myForm">
-		<form action="/action_page.php" class="form-container">
-		  <h1>Login</h1>
-	  
-		  <label for="email"><b>Email</b></label>
-		  <input type="text" placeholder="Enter Email" name="email" required>
-	  
-		  <label for="psw"><b>Password</b></label>
-		  <input type="password" placeholder="Enter Password" name="psw" required>
-	  
-		  <button type="submit" class="btn">Login</button>
-		  <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
-		</form>
-	</div>
-
 	<div class="topBar">
 		<div>
 			<img src="../Common/NileLogo.png" alt="Nile Logo">
@@ -47,7 +30,6 @@
 			<!-- header bar -->
 			<div>
 				<h>Pending Transaction</h>
-				<span class="button receiving">Request Now</span>
 			</div>
 			<!-- offer bar -->
 			<div class="flex-container">
@@ -67,7 +49,39 @@
 			<span class="box"></span> 
 		</div>
 	</div>
+	
 
+	<!-- Request now button -->
+	<button class="open-button" onclick="openForm()">Request Now</button>
+	
+	<!-- Request now form -->
+	<div class="form-popup" id="myForm">
+		<form action="/action_page.php" class="form-container">
+		<h1>Request Address</h1>
+	
+		<label for="email"><b>Product Information</b></label>
+		<input type="text" placeholder="Enter Product Details or SKU" name="email" required>
+	
+		<label for="psw"><b>Size</b></label>
+		<select type="password" placeholder="Enter Password" name="psw" id="size">
+			<option value="small">Small</option>
+			<option value="medium">Medium</option>
+			<option value="large">Large</option>
+		</select>
+		<br><br>
+
+		<label for="psw"><b>Category</b></label>
+		<select type="password" placeholder="Enter Password" name="psw" id="size">
+			<option value="one">Category 1</option>
+			<option value="two">Category 2</option>
+			<option value="three">Category 3</option>
+		</select>
+		<br><br>
+
+		<button type="submit" class="btn">Next</button>
+		<button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+		</form>
+	</div>
 
 	<script src="Client.js"></script>
 </body>
