@@ -1,0 +1,73 @@
+<!-- Rought draft of transaction page ͏-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Transaction</title>
+	<link rel="stylesheet" href="Client.css">
+	<link rel="stylesheet" href="../Common/Button.css">
+	<link rel="stylesheet" href="../Common/TopBar.css">
+</head>
+
+<body>
+
+	<button class="open-button" onclick="openForm()">Request Now</button>
+	
+	<div class="form-popup" id="myForm">
+		<form action="/action_page.php" class="form-container">
+		  <h1>Login</h1>
+	  
+		  <label for="email"><b>Email</b></label>
+		  <input type="text" placeholder="Enter Email" name="email" required>
+	  
+		  <label for="psw"><b>Password</b></label>
+		  <input type="password" placeholder="Enter Password" name="psw" required>
+	  
+		  <button type="submit" class="btn">Login</button>
+		  <button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+		</form>
+	</div>
+
+	<div class="topBar">
+		<div>
+			<img src="../Common/NileLogo.png" alt="Nile Logo">
+			<span>Nile</span>
+		</div>
+		<div>
+			<img class="avatar" src="../Common/NileLogo.png" alt="Avatar">
+			<span>Account</span>
+		</div>
+	</div>
+
+	<div class="placeholder">
+		<div class="placeholder">
+			<!-- header bar -->
+			<div>
+				<h>Pending Transaction</h>
+				<span class="button receiving">Request Now</span>
+			</div>
+			<!-- offer bar -->
+			<div class="flex-container">
+				<span class="box"></span>
+				<span class="box"></span>
+				<span class="box"></span> 
+			</div>
+
+		<!-- header bar -->
+		<div>
+			<h>Completed transaction</h>
+		</div>
+		<!-- offer bar -->
+		<div class="flex-container">
+			<span class="box"></span>
+			<span class="box"></span>
+			<span class="box"></span> 
+		</div>
+	</div>
+
+
+	<script src="Client.js"></script>
+</body>
+</html>
