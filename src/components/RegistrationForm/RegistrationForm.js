@@ -5,10 +5,13 @@ import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
 
 function RegistrationForm(props) {
+
     const [state , setState] = useState({
         email : "",
         password : "",
         confirmPassword: "",
+        client : false,
+        merchant : false,
         successMessage: null
     })
     const handleChange = (e) => {
@@ -33,7 +36,13 @@ function RegistrationForm(props) {
                             'successMessage' : 'Registration successful. Redirecting to home page..'
                         }))
                         localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
-                        redirectToHome();
+                        if(state.client) {
+                        redirectToClient();
+                        }
+                        else if(state.merchant) {
+                            redirectToMerchant();
+                        }
+
                         props.showError(null)
                     } else{
                         props.showError("Some error ocurred");
@@ -47,20 +56,38 @@ function RegistrationForm(props) {
         }
         
     }
-    const redirectToHome = () => {
-        props.updateTitle('Home')
-        props.history.push('/home');
+    const redirectToClient = () => {
+        props.updateTitle('Client')
+        props.history.push('/client');
+    }
+    const redirectToMerchant = () => {
+        props.updateTitle('Merchant')
+        props.history.push('/merchant');
     }
     const redirectToLogin = () => {
         props.updateTitle('Login')
         props.history.push('/login'); 
     }
+    const handleClient = () => {
+        state.client = true;
+        state.merchant = false;
+        console.log("client used");
+    } 
+    const handleMerchant = () => {
+        state.merchant = true;
+        state.client = false;
+        console.log("merchant used");
+    } 
     const handleSubmitClick = (e) => {
         e.preventDefault();
-        if(state.password === state.confirmPassword) {
-            sendDetailsToServer()    
-        } else {
+        if(state.password !== state.confirmPassword) {
             props.showError('Passwords do not match');
+        } 
+        else if(state.client === false && state.merchant === false) {
+            props.showError('Please select client or merchant');
+        }
+        else {
+            sendDetailsToServer();    
         }
     }
     return(
@@ -98,6 +125,23 @@ function RegistrationForm(props) {
                         onChange={handleChange} 
                     />
                 </div>
+
+                <button 
+                    type='button'
+                    onClick={handleClient}
+                >
+                    Client
+                </button>
+
+                <button 
+                    type='button'
+                    onClick={handleMerchant}
+                >
+                Merchant
+                </button>
+
+                <br></br>
+                <br></br>
                 <button 
                     type="submit" 
                     className="btn btn-primary"
