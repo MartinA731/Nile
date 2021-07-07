@@ -8,7 +8,9 @@ function LoginForm(props) {
     const [state , setState] = useState({
         email : "",
         password : "",
-        successMessage: null
+        successMessage: null,
+        client : false,
+        merchant : false
     })
     const handleChange = (e) => {
         const {id , value} = e.target   
@@ -17,9 +19,30 @@ function LoginForm(props) {
             [id] : value
         }))
     }
-
+    const redirectToClient = () => {
+        props.updateTitle('Client')
+        props.history.push('/client');
+    }
+    const redirectToMerchant = () => {
+        props.updateTitle('Merchant')
+        props.history.push('/merchant');
+    }
+    const handleClient = () => {
+        state.client = true;
+        state.merchant = false;
+        console.log("client used");
+    } 
+    const handleMerchant = () => {
+        state.merchant = true;
+        state.client = false;
+        console.log("merchant used");
+    } 
     const handleSubmitClick = (e) => {
         e.preventDefault();
+        if(state.client === false && state.merchant === false) {
+            props.showError('Please select client or merchant');
+        }
+        else {
         const payload={
             "email":state.email,
             "password":state.password,
@@ -32,7 +55,12 @@ function LoginForm(props) {
                         'successMessage' : 'Login successful. Redirecting to home page..'
                     }))
                     localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
-                    redirectToHome();
+                    if(state.client) {
+                        redirectToClient();
+                        }
+                    else if(state.merchant) {
+                        redirectToMerchant();
+                    }
                     props.showError(null)
                 }
                 else if(response.code === 204){
@@ -45,11 +73,7 @@ function LoginForm(props) {
             .catch(function (error) {
                 console.log(error);
             });
-    }
-    const redirectToHome = () => {
-        props.updateTitle('Home')
-        props.history.push('/home');
-    }
+    }}
     const redirectToRegister = () => {
         props.history.push('/register'); 
         props.updateTitle('Register');
@@ -81,6 +105,22 @@ function LoginForm(props) {
                 </div>
                 <div className="form-check">
                 </div>
+            <button 
+            type='button'
+            onClick={handleClient}
+            >
+            Client
+            </button>
+
+            <button 
+                type='button'
+                onClick={handleMerchant}
+            >
+            Merchant
+            </button>
+
+            <br></br>
+            <br></br>
                 <button 
                     type="submit" 
                     className="btn btn-primary"

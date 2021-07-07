@@ -3,7 +3,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import LoginForm from './components/LoginForm/LoginForm';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
-import Home from './components/Home/Home';
+import Client from './client/ClientConnection';
+//import Merchant from './merchant/Merchant';
 import PrivateRoute from './utils/PrivateRoute';
 import {
   BrowserRouter as Router,
@@ -29,8 +30,8 @@ function App() {
             <Route path="/login">
               <LoginForm showError={updateErrorMessage} updateTitle={updateTitle}/>
             </Route>
-            <PrivateRoute path="/home">
-              <Home/>
+            <PrivateRoute path="/client">
+            <Client/>
             </PrivateRoute>
           </Switch>
           <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
