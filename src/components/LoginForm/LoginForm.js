@@ -30,12 +30,10 @@ function LoginForm(props) {
     const handleClient = () => {
         state.client = true;
         state.merchant = false;
-        console.log("client used");
     } 
     const handleMerchant = () => {
         state.merchant = true;
         state.client = false;
-        console.log("merchant used");
     } 
     const handleSubmitClick = (e) => {
         e.preventDefault();
