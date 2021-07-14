@@ -3,6 +3,7 @@ import axios from 'axios';
 import './LoginForm.css';
 import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
+import "../../common/Button.css";
 
 function LoginForm(props) {
     const [state , setState] = useState({
@@ -28,12 +29,26 @@ function LoginForm(props) {
         props.history.push('/merchant');
     }
     const handleClient = () => {
-        state.client = true;
-        state.merchant = false;
+        //Only select if client is unselected
+        if(state.client === false) {
+            state.client = true;
+            state.merchant = false;
+
+            //Ineffiecnt, pointer to DOM should be made
+            document.getElementsByClassName("client")[0].className = "button selected client";
+            document.getElementsByClassName("merchant")[0].className = "button unselected merchant";
+        }
     } 
     const handleMerchant = () => {
-        state.merchant = true;
-        state.client = false;
+        //Do nothing if merchant is already selected
+        if(state.merchant === false) {
+            state.merchant = true;
+            state.client = false;
+            
+            //Ineffiecnt, pointer to DOM should be made
+            document.getElementsByClassName("merchant")[0].className = "button selected merchant";
+            document.getElementsByClassName("client")[0].className = "button unselected client";
+        }
     } 
     const handleSubmitClick = (e) => {
         e.preventDefault();
@@ -103,19 +118,13 @@ function LoginForm(props) {
                 </div>
                 <div className="form-check">
                 </div>
-            <button 
-            type='button'
-            onClick={handleClient}
-            >
-            Client
-            </button>
+            <span class="button unselected client"
+                onClick={handleClient}>
+            Client</span>
 
-            <button 
-                type='button'
-                onClick={handleMerchant}
-            >
-            Merchant
-            </button>
+            <span class="button unselected merchant"
+                onClick={handleMerchant}>
+            Merchant</span>
 
             <br></br>
             <br></br>
