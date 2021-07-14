@@ -4,6 +4,7 @@ Doesn't work for darker buttons(rgb less than 50)
 designed for button with innerhtml with 4-10char.
 */
 span.button {
+	display: inline-block;
 	padding: 0.6em 1em;
 	background-color: rgb(
 		var(--r), var(--g), var(--b)
