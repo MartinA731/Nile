@@ -4,16 +4,23 @@ import './Client.css';
 import '../common/Button.css';
 import '../common/TopBar.css';
 import logo from '../common/NileLogo.png';
+import TableDatePicker from './dateSelect';
+
 
 
 function Client(props) {
-    const openForm = () => {
-      console.log("opened form");
-      document.getElementById("myForm").style.display = "block";
+    const openFirstForm = () => {
+      document.getElementById("firstForm").style.display = "block";
     }
-    const closeForm = () => {
-      console.log("closed form");
-      document.getElementById("myForm").style.display = "none";
+    const closeFirstForm = () => {
+      document.getElementById("firstForm").style.display = "none";
+    }
+    const openSecondForm = () => {
+      document.getElementById("secondForm").style.display = "block";
+      document.getElementById("firstForm").style.display = "none";
+    }
+    const closeSecondForm = () => {
+      document.getElementById("secondForm").style.display = "none";
     }
     return(
         <div>
@@ -25,6 +32,7 @@ function Client(props) {
           <link rel="stylesheet" href="../Common/Button.css" />
           <link rel="stylesheet" href="../Common/TopBar.css" />
           {/* test */}
+
           <div className="topBar">
             <div>
               <img src={logo} alt="logo" />
@@ -59,9 +67,9 @@ function Client(props) {
               </div>
             </div>
             {/* Request now button */}
-            <button className="open-button" onClick={openForm}>Request Now</button>
-            {/* Request now form */}
-            <div className="form-popup" id="myForm">
+            <button className="open-button" onClick={openFirstForm}>Request Now</button>
+            {/* Request now first form */}
+            <div className="form-popup" id="firstForm">
               <form action="/action_page.php" className="form-container">
                 <h1>Request Address</h1>
                 <label htmlFor="email"><b>Product Information</b></label>
@@ -80,10 +88,25 @@ function Client(props) {
                   <option value="three">Category 3</option>
                 </select>
                 <br /><br />
-                <button type="submit" className="btn">Next</button>
-                <button type="submit" className="btn cancel" onClick={closeForm}>Close</button>
+                <button type="submit" className="btn" onClick={openSecondForm}>Next</button>
+                <button type="submit" className="btn cancel" onClick={closeFirstForm}>Close</button>
               </form>
             </div>
+            {/* Request now second form */}
+            <div className="form-popup" id="secondForm">
+            <form action="/action_page.php" className="form-container">
+              <h1>Request Address</h1>
+              <label htmlFor="email"><b>Location</b></label>
+              <br /><br />
+              <label htmlFor="email"><b>Estimated Delivery Date</b></label>
+              <TableDatePicker></TableDatePicker>
+              <button type="button" className="btn" >Next</button>
+              <button type= "button" className="btn cancel" onClick={closeSecondForm}>Close</button>
+            </form>
+          </div>
+
+
+
           </div></div>
       )
 }
