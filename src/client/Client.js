@@ -5,6 +5,7 @@ import '../common/Button.css';
 import '../common/TopBar.css';
 import logo from '../common/NileLogo.png';
 import TableDatePicker from './dateSelect';
+import Location from './Location'
 
 
 
@@ -98,6 +99,7 @@ function Client(props) {
               <h1>Request Address</h1>
               <label htmlFor="email"><b>Location</b></label>
               <br /><br />
+              <Location></Location>
               <label htmlFor="email"><b>Estimated Delivery Date</b></label>
               <TableDatePicker></TableDatePicker>
               <button type="button" className="btn" >Next</button>
