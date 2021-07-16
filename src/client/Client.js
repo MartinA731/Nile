@@ -89,8 +89,8 @@ function Client(props) {
                   <option value="three">Category 3</option>
                 </select>
                 <br /><br />
-                <button type="submit" className="btn" onClick={openSecondForm}>Next</button>
-                <button type="submit" className="btn cancel" onClick={closeFirstForm}>Close</button>
+                <button type="button" className="btn" onClick={openSecondForm}>Next</button>
+                <button type="button" className="btn cancel" onClick={closeFirstForm}>Close</button>
               </form>
             </div>
             {/* Request now second form */}
