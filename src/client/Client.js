@@ -7,19 +7,14 @@ import TopBar from '../common/TopBar';
 import Boxes from './Boxes';
 import FirstForm from './FirstForm';
 import SecondForm from './SecondForm';
+import ThirdForm from './ThirdForm';
 import RequestNow from './RequestNow';
 
 
 
 function Client(props) {
-
-
     return(
         <div>
-
-          {/* top bar */}
-          <TopBar></TopBar>
-         
           {/* Request now button */}
           <RequestNow></RequestNow>
 
@@ -32,6 +27,8 @@ function Client(props) {
 
           {/* Request now second form */}
           <SecondForm></SecondForm>
+
+          <ThirdForm></ThirdForm>
 
         </div>
       )

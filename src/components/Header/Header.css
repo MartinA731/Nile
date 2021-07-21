@@ -1,0 +1,32 @@
+.img1{
+    position: relative;
+    left: -2.5%;
+    margin-top: -25px;
+    margin-bottom: -30px;
+    width: 125px;
+	height: 125px;
+}
+
+.navbar-custom {
+    background-color: rgb(10, 165, 226);
+}
+/* Modify brand and text color */
+  
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    color: rgb(10, 173, 10);
+}
+
+.logout{
+    position: relative;
+    left: 80%;
+    margin-top: 15px;
+}
+
+.h3{
+    position: center;
+    position:relative;
+    left: 39%;
+    margin-top: 15px;
+    color:white;
+}

@@ -6,6 +6,10 @@ function SecondForm() {
   const closeSecondForm = () => {
     document.getElementById("secondForm").style.display = "none";
   };
+  const openThirdForm = () => {
+    document.getElementById("thirdForm").style.display = "block";
+    document.getElementById("secondForm").style.display = "none";
+  };
   return (
     <div className="form-popup" id="secondForm">
       <form action="/action_page.php" className="form-container">
@@ -14,13 +18,12 @@ function SecondForm() {
           <b>Location</b>
         </label>
         <br />
-        <br />
         <Location></Location>
         <label htmlFor="email">
           <b>Estimated Delivery Date</b>
         </label>
         <TableDatePicker></TableDatePicker>
-        <button type="button" className="btn">
+        <button type="button" className="btn" onClick={openThirdForm}>
           Next
         </button>
         <button type="button" className="btn cancel" onClick={closeSecondForm}>
