@@ -1,9 +1,10 @@
 /*
-generic button using span tag.
+generic button
 Doesn't work for darker buttons(rgb less than 50)
 designed for button with innerhtml with 4-10char.
+Any span class that starts with button will "inherit" this class
 */
-span.button {
+span[class*="button-"] {
 	display: inline-block;
 	padding: 0.6em 1em;
 	background-color: rgb(
@@ -13,7 +14,7 @@ span.button {
   user-select: none;
 }
 
-span.button:hover {
+span[class*="button-"]:hover {
 	background-color: rgb(
 		calc(var(--r) - 25),
 		calc(var(--g) - 25),
@@ -21,10 +22,72 @@ span.button:hover {
 	);
 }
 
-span.button:active {
+span[class*="button-"]:active {
 	background-color: rgb(
 		calc(var(--r) - 50),
 		calc(var(--g) - 50),
 		calc(var(--b) - 50)
 	);
+}
+
+/* declaration */
+/* color when button are unselected, color from submit button */
+/* span.button-unselected {
+  --r: 0;
+  --g: 123;
+  --b: 255;
+	color: white;
+} */
+span.button-unselected {
+  --r: 255;
+  --g: 255;
+  --b: 255;
+	color: #4472c4;
+}
+
+/* color when button are selected, color from submit button */
+/* span.button-selected {
+  --r: 0;
+  --g: 105;
+  --b: 217;
+	color: white;
+} */
+span.button-selected {
+  --r: 225;
+  --g: 225;
+  --b: 225;
+	color: #4472c4;
+}
+
+/* contains all the button that are in a row */
+div.btnContainer {
+  display: flex;
+	text-align: center;
+}
+
+/* left button. left side is rounded, right is flat */
+span.left {
+  flex-basis: 100%;
+  border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border: solid #0064c8;
+	border-width: 2px;
+}
+
+/* midde button. All side flat */
+span.mid {
+  flex-basis: 100%;
+  border-radius: 0;
+	border: solid #0064c8;
+	border-width: 2px 2px 2px 0;
+}
+
+
+/* right button. right side is rounded, left is flat */
+span.right {
+  flex-basis: 100%;
+  border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border: solid #0064c8;
+	border-width: 2px 2px 2px 0;
 }
