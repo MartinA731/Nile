@@ -69,14 +69,24 @@ function RegistrationForm(props) {
         props.history.push('/login'); 
     }
     const handleClient = () => {
-        state.client = true;
-        state.merchant = false;
-        console.log("client used");
+        //Only select if client is unselected
+        if(state.client === false) {
+            state.client = true;
+            state.merchant = false;
+
+            document.getElementById("client").className = "left button-selected";
+            document.getElementById("merchant").className = "right button-unselected";
+        }
     } 
     const handleMerchant = () => {
-        state.merchant = true;
-        state.client = false;
-        console.log("merchant used");
+        //Do nothing if merchant is already selected
+        if(state.merchant === false) {
+            state.merchant = true;
+            state.client = false;
+            
+            document.getElementById("merchant").className = "right button-selected";
+            document.getElementById("client").className = "left button-unselected";
+        }
     } 
     const handleSubmitClick = (e) => {
         e.preventDefault();
@@ -125,20 +135,11 @@ function RegistrationForm(props) {
                         onChange={handleChange} 
                     />
                 </div>
+                <div className="btnContainer" id="clientMerchButton">
+                    <span id="client" className="left button-unselected" onClick={handleClient}>Client</span>
 
-                <button 
-                    type='button'
-                    onClick={handleClient}
-                >
-                    Client
-                </button>
-
-                <button 
-                    type='button'
-                    onClick={handleMerchant}
-                >
-                Merchant
-                </button>
+                    <span id="merchant" className="right button-unselected" onClick={handleMerchant}>Merchant</span>
+                </div>
 
                 <br></br>
                 <br></br>

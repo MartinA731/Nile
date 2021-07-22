@@ -35,16 +35,7 @@ function Merchant(props) {
           <link rel="stylesheet" href="Merchant.css" />
           <link rel="stylesheet" href="../Common/Button.css" />
           <link rel="stylesheet" href="../Common/TopBar.css" />
-          <div className="topBar">
-            <div>
-              <img src={logo} alt="logo" />
-              <span>Nile</span>
-            </div>
-            <div>
-              <img className="avatar" src={logo} alt="logo" />
-              <span>Account</span>
-            </div>
-          </div>
+ 
           <div className="placeholder">
             {/* header bar */}
             <div>

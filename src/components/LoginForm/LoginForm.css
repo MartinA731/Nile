@@ -1,39 +1,8 @@
 .login-card {
-    min-height: 60vh;
+  min-height: 60vh;
 }
 
 .registerMessage {
-    margin-top: 10vh;
+  margin-top: 10vh;
 }
 
-/* color when Client/Merchant button are unselected, color from submit button */
-span.unselected {
-  --r: 0;
-  --g: 123;
-  --b: 255;
-	color: white;
-}
-
-/* color when client/merchant button are unselected, color from submit button */
-span.selected {
-  --r: 0;
-  --g: 105;
-  --b: 217;
-	color: white;
-}
-
-/* css for client button */
-span.client {
-	width: 105px;
-  border-top-right-radius: 0 !important;
-	border-bottom-right-radius: 0 !important;
-	border-right: 1px solid #0064c8;
-}
-
-/* css for merchant button */
-span.merchant {
-	width: 105px;
-  border-top-left-radius: 0 !important;
-	border-bottom-left-radius: 0 !important;
-	border-left: 1px solid #0064c8;
-}

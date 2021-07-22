@@ -17,14 +17,15 @@ function Header(props) {
         if(props.location.pathname === '/client' || props.location.pathname === '/merchant'){
             return(
                 <div className="ml-auto">
-                    <button className="btn btn-danger" onClick={() => handleLogout()}>Logout</button>
+                    <button className="btn btn-danger" type="button" onClick={() => handleLogout()}>Logout</button>
                 </div>
             )
         }
     }
     function handleLogout() {
-        localStorage.removeItem(ACCESS_TOKEN_NAME)
-        props.history.push('/login')
+        window.location.reload(); 
+        localStorage.removeItem(ACCESS_TOKEN_NAME);
+        props.history.push('/login');
     }
     return(
         <nav className="navbar navbar-custom">

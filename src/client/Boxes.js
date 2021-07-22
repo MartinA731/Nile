@@ -6,7 +6,7 @@ function Boxes() {
       <div className="placeholder">
         {/* header bar */}
         <div>
-          <h>Pending Transaction</h>
+          <h>Pending Transactions</h>
         </div>
         {/* offer bar */}
         <div className="flex-container">
@@ -16,7 +16,7 @@ function Boxes() {
         </div>
         {/* header bar */}
         <div>
-          <h>Completed transaction</h>
+          <h>Completed Transactions</h>
         </div>
         {/* offer bar */}
         <div className="flex-container">

@@ -13,17 +13,16 @@ function SecondForm() {
   return (
     <div className="form-popup" id="secondForm">
       <form action="/action_page.php" className="form-container">
-        <h1>Request Address</h1>
-        <label htmlFor="email">
+        <h4>Request Address</h4>
+        <label>
           <b>Location</b>
-        </label>
-        <br />
-        <Location></Location>
-        <label htmlFor="email">
+        </label> <br />
+        <Location></Location> 
+        <label>
           <b>Estimated Delivery Date</b>
-        </label>
-        <TableDatePicker></TableDatePicker>
-        <button type="button" className="btn" onClick={openThirdForm}>
+        </label>  <br />
+        <TableDatePicker></TableDatePicker> <br /> <br />
+        <button type="button" className="btn" id="nextTwo" onClick={openThirdForm}>
           Next
         </button>
         <button type="button" className="btn cancel" onClick={closeSecondForm}>
