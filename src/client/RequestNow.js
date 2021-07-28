@@ -1,14 +1,30 @@
 import React from "react";
 
-function RequestNow() {
+
+class RequestNow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
+
+  render() {
   const openFirstForm = () => {
-    document.getElementById("firstForm").style.display = "block";
+    if(window.formOpen === undefined || window.formOpen === false) {
+      document.getElementById("firstForm").style.display = "block"; 
+      window.formOpen = true;
+    }
   };
   return (
-    <button className="open-button" onClick={openFirstForm}>
-      Request Now
-    </button>
+    <div> 
+      <button className="open-button" onClick={openFirstForm}>
+        Request Now
+      </button>
+    </div>
   );
+  }
+  
 }
+
 
 export default RequestNow;

@@ -1,9 +1,32 @@
-import React, {useRef} from "react";
+import React, {createRef} from "react";
+import SecondForm from './SecondForm';
+import Client from './Client';
+import Data from './Data'
 
 
-function FirstForm() {
+
+class FirstForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            prodDetails : ""
+        }
+    }
+    handleSubmit = (event) => {
+        event.preventDefault()
+    }
+    handleInputChange = (event) => {
+        event.preventDefault();
+        this.setState({
+            prodDetails : event.target.value
+        });
+    }
+    
+    
+    render() {
     const closeFirstForm = () => {
         document.getElementById("firstForm").style.display = "none";
+        window.formOpen = false;
       };
     const openSecondForm = () => {
         document.getElementById("secondForm").style.display = "block";
@@ -28,20 +51,24 @@ function FirstForm() {
         //if current clicked button is unselected, select it
         if(tarBtn.classList.contains("button-unselected")) {
             tarBtn.classList.replace("button-unselected", "button-selected");
-        }
-    }
+        }   
+    };
+
     //pointer to size button container
-    const btnContainer = useRef(null);
+    //const btnContainer = useRef(null);
+    const btnContainer = createRef();
+    
+
     return (
         <div className="form-popup" id="firstForm">
-            <form action="/action_page.php" className="form-container">
-                <h4>Request Address</h4>
+            <form action="/action_page.php" className="form-container" onSubmit={this.handleSubmit}>
+                <h4>{this.state.prodDetails} Request Address</h4>
                 <label>
                     <b>Details</b>
                 </label> <br />
                 <div className="input-container" id="subtitle-space">
                     <div className="hidden" aria-hidden="true">Enter Product Details or SKU padding</div>
-                    <input type="text" placeholder="Enter Product Details or SKU" name="email" required/>
+                    <input type="text" placeholder="Enter Product Details or SKU" onChange={this.handleInputChange} id="prod-details" required/>
                 </div> <br />
                 <label>
                     <b>Size</b>
@@ -65,9 +92,13 @@ function FirstForm() {
                 <button type="button" className="btn cancel" onClick={closeFirstForm}>
                 Close
                 </button>
+                <Data data={this.state.prodDetails}></Data>
         </form>
     </div>
     );
+    }
+    
 }   
+
 
 export default FirstForm;

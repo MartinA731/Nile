@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import './Client.css';
 import '../common/Button.css';
 import '../common/TopBar.css';
-import TopBar from '../common/TopBar';
 import Boxes from './Boxes';
 import FirstForm from './FirstForm';
 import SecondForm from './SecondForm';
@@ -12,18 +11,23 @@ import RequestNow from './RequestNow';
 
 
 
-function Client(props) {
+class Client extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+      }
+    }
+    render() {
     return(
         <div>
           {/* Request now button */}
-          <RequestNow></RequestNow>
+          <RequestNow></RequestNow> 
 
           {/* Boxes in middle */}
           <Boxes></Boxes>
 
           {/* Request now first form */}
           <FirstForm></FirstForm>
-
 
           {/* Request now second form */}
           <SecondForm></SecondForm>
@@ -32,6 +36,7 @@ function Client(props) {
 
         </div>
       )
+    }
 }
 
 

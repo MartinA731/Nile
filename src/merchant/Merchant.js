@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import './Merchant.css';
 import '../common/Button.css';
 import '../common/TopBar.css';
-import logo from '../common/NileLogo.png';
 
 
 function Merchant(props) {

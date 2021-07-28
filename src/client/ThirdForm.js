@@ -4,6 +4,7 @@ import React from "react";
 function ThirdForm() {
   const closeThirdForm = () => {
     document.getElementById("thirdForm").style.display = "none";
+    window.formOpen = false;
   };
   const totalCost = "$7.31 for now";
   const payMethod = "Venmo for now";
@@ -30,6 +31,7 @@ function ThirdForm() {
       </form>
     </div>
   );
+  
 }
 
 export default ThirdForm;

@@ -2,9 +2,16 @@ import React from "react";
 import TableDatePicker from "./dateSelect";
 import Location from "./Location";
 
-function SecondForm() {
+class SecondForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    }
+  }
+  render() {
   const closeSecondForm = () => {
     document.getElementById("secondForm").style.display = "none";
+    window.formOpen = false;
   };
   const openThirdForm = () => {
     document.getElementById("thirdForm").style.display = "block";
@@ -31,6 +38,7 @@ function SecondForm() {
       </form>
     </div>
   );
+  }
 }
 
 export default SecondForm;
