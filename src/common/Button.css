@@ -2,19 +2,19 @@
 generic button
 Doesn't work for darker buttons(rgb less than 50)
 designed for button with innerhtml with 4-10char.
-Any span class that starts with button will "inherit" this class
+Any span class that ends with button will "inherit" this class
 */
-span[class*="button-"] {
+span[class$="-button"] {
 	display: inline-block;
 	padding: 0.6em 1em;
 	background-color: rgb(
 		var(--r), var(--g), var(--b)
 	);
 	border-radius: 10%;
-  user-select: none;
+    user-select: none;
 }
 
-span[class*="button-"]:hover {
+span[class$="-button"]:hover {
 	background-color: rgb(
 		calc(var(--r) - 25),
 		calc(var(--g) - 25),
@@ -22,7 +22,7 @@ span[class*="button-"]:hover {
 	);
 }
 
-span[class*="button-"]:active {
+span[class$="-button"]:active {
 	background-color: rgb(
 		calc(var(--r) - 50),
 		calc(var(--g) - 50),
@@ -31,6 +31,14 @@ span[class*="button-"]:active {
 }
 
 /* declaration */
+span.dropDown-button {
+    --r: 255;
+    --g: 255;
+    --b: 255;
+    width: 100%;
+    color: black;
+}
+
 /* color when button are unselected, color from submit button */
 /* span.button-unselected {
   --r: 0;
@@ -38,7 +46,7 @@ span[class*="button-"]:active {
   --b: 255;
 	color: white;
 } */
-span.button-unselected {
+span.unselected-button {
   --r: 255;
   --g: 255;
   --b: 255;
@@ -52,32 +60,32 @@ span.button-unselected {
   --b: 217;
 	color: white;
 } */
-span.button-selected {
-  --r: 255;
-  --g: 204;
-  --b: 102;
+span.selected-button {
+    --r: 225;
+    --g: 225;
+    --b: 225;
 	color: #4472c4;
 }
 
 /* contains all the button that are in a row */
 div.btnContainer {
-  	display: flex;
+    display: flex;
 	text-align: center;
 }
 
 /* left button. left side is rounded, right is flat */
 span.left {
-  flex-basis: 100%;
-  border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+    flex-basis: 100%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 	border: solid #0064c8;
 	border-width: 2px;
 }
 
 /* midde button. All side flat */
 span.mid {
-  flex-basis: 100%;
-  border-radius: 0;
+    flex-basis: 100%;
+    border-radius: 0;
 	border: solid #0064c8;
 	border-width: 2px 2px 2px 0;
 }
@@ -85,8 +93,8 @@ span.mid {
 
 /* right button. right side is rounded, left is flat */
 span.right {
-  flex-basis: 100%;
-  border-top-left-radius: 0;
+    flex-basis: 100%;
+    border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 	border: solid #0064c8;
 	border-width: 2px 2px 2px 0;
