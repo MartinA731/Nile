@@ -8,6 +8,7 @@ import FirstForm from './FirstForm';
 import SecondForm from './SecondForm';
 import ThirdForm from './ThirdForm';
 import RequestNow from './RequestNow';
+import data from '../common/Data';
 
 
 
@@ -38,7 +39,6 @@ class Client extends React.Component {
       )
     }
 }
-
 
 
 export default withRouter(Client);

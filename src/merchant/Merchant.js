@@ -26,6 +26,7 @@ function Merchant(props) {
             btn.style.setProperty("--b", 35);
         }
     }
+
     return (
         <div>
           <meta charSet="utf-8" />

@@ -1,4 +1,5 @@
 import React from "react";
+import LocaleContext from "../common/LocaleContext";
 
 
 class RequestNow extends React.Component {

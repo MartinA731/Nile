@@ -1,7 +1,5 @@
 import React, {createRef} from "react";
-import SecondForm from './SecondForm';
-import Client from './Client';
-import Data from './Data'
+import Data from '../common/Data';
 
 
 
@@ -9,7 +7,8 @@ class FirstForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            prodDetails : ""
+            prodDetails : "",
+            render: false,
         }
     }
     handleSubmit = (event) => {
@@ -19,18 +18,22 @@ class FirstForm extends React.Component {
         event.preventDefault();
         this.setState({
             prodDetails : event.target.value
-        });
+        })
     }
+    openSecondForm = () => {
+        this.setState({render: true});   
+        document.getElementById("secondForm").style.display = "block";
+        document.getElementById("firstForm").style.display = "none";
+        this.refs.textDescription.value = '';
+     }
     
     
     render() {
     const closeFirstForm = () => {
+        this.setState({render: false}); 
         document.getElementById("firstForm").style.display = "none";
         window.formOpen = false;
-      };
-    const openSecondForm = () => {
-        document.getElementById("secondForm").style.display = "block";
-        document.getElementById("firstForm").style.display = "none";
+        this.refs.textDescription.value = '';
       };
     //next 3 arrow func toggles which button for size is selected
     const handleSize = (e) => {
@@ -62,13 +65,13 @@ class FirstForm extends React.Component {
     return (
         <div className="form-popup" id="firstForm">
             <form action="/action_page.php" className="form-container" onSubmit={this.handleSubmit}>
-                <h4>{this.state.prodDetails} Request Address</h4>
+                <h4> Request Address</h4>
                 <label>
                     <b>Details</b>
                 </label> <br />
                 <div className="input-container" id="subtitle-space">
                     <div className="hidden" aria-hidden="true">Enter Product Details or SKU padding</div>
-                    <input type="text" placeholder="Enter Product Details or SKU" onChange={this.handleInputChange} id="prod-details" required/>
+                    <input type="text" placeholder="Enter Product Details or SKU" ref="textDescription" onChange={this.handleInputChange} id="prod-details" required/>
                 </div> <br />
                 <label>
                     <b>Size</b>
@@ -86,13 +89,13 @@ class FirstForm extends React.Component {
                     <option value="two">Category 2</option>
                     <option value="three">Category 3</option>
                 </select> <br /> <br />
-                <button type="button" className="btn" onClick={openSecondForm}>
+                <button type="button" className="btn" onClick={() => this.openSecondForm()}>
                 Next
                 </button>
                 <button type="button" className="btn cancel" onClick={closeFirstForm}>
                 Close
                 </button>
-                <Data data={this.state.prodDetails}></Data>
+                {this.state.render && <Data propDetails={this.state.prodDetails}></Data>}
         </form>
     </div>
     );
