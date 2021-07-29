@@ -34,8 +34,10 @@ function Header(props) {
     }
     function handleSettings() {
         props.history.push('/Settings')
+        window.location.reload();
     }
     function handleLogout() {
+        window.location.reload(); 
         localStorage.removeItem(ACCESS_TOKEN_NAME)
         props.history.push('/login')
     }
