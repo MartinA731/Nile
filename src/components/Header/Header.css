@@ -12,11 +12,10 @@
     background-color: rgb(10, 165, 226);
 }
 
-/* width of img and avatar must be the same for middle element to be in the middle */
 .navbar-custom img {
     float: left;
-	width: 50px;
-	height: 50px;
+    width: 50px;
+    height: 50px;
 }
 
 .navbar-custom .account {
@@ -26,12 +25,12 @@
 }
 
 .account .avatar {
-    margin: 0 12.5px;
-	width: 25px;
-	height: 25px;
+    margin-right: 11px;
+    width: 25px;
+    height: 25px;
     /* place holder color */
     background-color: orange;
-	border-radius: 50%;
+    border-radius: 50%;
 }
 
 /* initally hidden */
