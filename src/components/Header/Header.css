@@ -1,32 +1,58 @@
-.img1{
-    position: relative;
-    left: -2.5%;
-    margin-top: -25px;
-    margin-bottom: -30px;
-    width: 125px;
-	height: 125px;
+.hidden {
+    height: 0;
+    visibility: hidden;
 }
 
 .navbar-custom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vh 2vw;
+    color:white;
     background-color: rgb(10, 165, 226);
 }
-/* Modify brand and text color */
-  
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
-    color: rgb(10, 173, 10);
+
+/* width of img and avatar must be the same for middle element to be in the middle */
+.navbar-custom img {
+    float: left;
+	width: 50px;
+	height: 50px;
 }
 
-.logout{
+.navbar-custom .account {
     position: relative;
-    left: 80%;
-    margin-top: 15px;
+    display: flex;
+    align-items: center;
 }
 
-.h3{
-    position: center;
-    position:relative;
-    left: 39%;
-    margin-top: 15px;
-    color:white;
+.account .avatar {
+    margin: 0 12.5px;
+	width: 25px;
+	height: 25px;
+    /* place holder color */
+    background-color: orange;
+	border-radius: 50%;
+}
+
+/* initally hidden */
+.account .dropdown {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1;
+    visibility: hidden;
+    /* placeholder colors */
+    background-color: white;
+    border-radius: 10%;
+    /* allow mouse to move to dropdown without disappearing */
+    transition-duration: 250ms;
+}
+
+/* show dropdown */
+.account:hover > .dropdown {
+    visibility: visible;
+}
+
+.dropdown:hover {
+    visibility: visible;
 }
