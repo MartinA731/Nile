@@ -1,32 +1,9 @@
-import React, {createRef} from "react";
-import SecondForm from './SecondForm';
-import Client from './Client';
-import Data from './Data'
+import React, {useRef} from "react";
 
 
-
-class FirstForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            prodDetails : ""
-        }
-    }
-    handleSubmit = (event) => {
-        event.preventDefault()
-    }
-    handleInputChange = (event) => {
-        event.preventDefault();
-        this.setState({
-            prodDetails : event.target.value
-        });
-    }
-    
-    
-    render() {
+function FirstForm() {
     const closeFirstForm = () => {
         document.getElementById("firstForm").style.display = "none";
-        window.formOpen = false;
       };
     const openSecondForm = () => {
         document.getElementById("secondForm").style.display = "block";
@@ -44,61 +21,54 @@ class FirstForm extends React.Component {
             const sizeBtn = sizeBtns[i];
 
             //Only unselect if sizeBtn is selected and is not the target button
-            if(sizeBtn.classList.contains("button-selected") && tarBtn !== sizeBtn) {
-                sizeBtn.classList.replace("button-selected", "button-unselected");
+            if(sizeBtn.classList.contains("selected-button") && tarBtn !== sizeBtn) {
+                sizeBtn.classList.replace("selected-button", "unselected-button");
             }
         }
         //if current clicked button is unselected, select it
-        if(tarBtn.classList.contains("button-unselected")) {
-            tarBtn.classList.replace("button-unselected", "button-selected");
-        }   
-    };
-
+        if(tarBtn.classList.contains("unselected-button")) {
+            tarBtn.classList.replace("unselected-button", "selected-button");
+        }
+    }
     //pointer to size button container
-    //const btnContainer = useRef(null);
-    const btnContainer = createRef();
-    
-
+    const btnContainer = useRef(null);
     return (
         <div className="form-popup" id="firstForm">
-            <form action="/action_page.php" className="form-container" onSubmit={this.handleSubmit}>
-                <h4>{this.state.prodDetails} Request Address</h4>
-                <label>
-                    <b>Details</b>
-                </label> <br />
-                <div className="input-container" id="subtitle-space">
+            <form action="/action_page.php" className="form-container">
+                <h4>Request Address</h4>
+                <div className="input-container">
                     <div className="hidden" aria-hidden="true">Enter Product Details or SKU padding</div>
-                    <input type="text" placeholder="Enter Product Details or SKU" onChange={this.handleInputChange} id="prod-details" required/>
-                </div> <br />
-                <label>
+                    <input type="text" placeholder="Enter Product Details or SKU" name="email" required/>
+                </div>
+                <br />
+                <label htmlFor="psw">
                     <b>Size</b>
                 </label>
-                <div className="btnContainer" ref={btnContainer}  id="subtitle-space">
-                    <span value="small" className="left button-unselected" onClick={handleSize}>Small</span>
-                    <span value="medium" className="mid button-unselected" onClick={handleSize}>Medium</span>
-                    <span value="large" className="right button-unselected" onClick={handleSize}>Large</span>
+                <div className="btnContainer" ref={btnContainer}>
+                    <span value="small" className="left unselected-button" onClick={handleSize}>Small</span>
+                    <span value="medium" className="mid unselected-button" onClick={handleSize}>Medium</span>
+                    <span value="large" className="right unselected-button" onClick={handleSize}>Large</span>
                 </div>
-                <label>
+                <label htmlFor="psw">
                     <b>Category</b>
-                </label> <br />
+                </label>
+                <br />
                 <select type="password" placeholder="Enter Password" name="psw" id="size">
                     <option value="one">Category 1</option>
                     <option value="two">Category 2</option>
                     <option value="three">Category 3</option>
-                </select> <br /> <br />
+                </select>
+                <br />
+                <br />
                 <button type="button" className="btn" onClick={openSecondForm}>
                 Next
                 </button>
                 <button type="button" className="btn cancel" onClick={closeFirstForm}>
                 Close
                 </button>
-                <Data data={this.state.prodDetails}></Data>
         </form>
     </div>
     );
-    }
-    
 }   
-
 
 export default FirstForm;
