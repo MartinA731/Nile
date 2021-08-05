@@ -1,15 +1,7 @@
 import React from "react";
-import LocaleContext from "../common/LocaleContext";
 
 
-class RequestNow extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
-
-  render() {
+function RequestNow() {  
   const openFirstForm = () => {
     if(window.formOpen === undefined || window.formOpen === false) {
       document.getElementById("firstForm").style.display = "block"; 
@@ -23,7 +15,7 @@ class RequestNow extends React.Component {
       </button>
     </div>
   );
-  }
+  
   
 }
 

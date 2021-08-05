@@ -6,15 +6,18 @@ import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import Client from './client/Client';
 import Merchant from './merchant/Merchant';
 import PrivateRoute from './utils/PrivateRoute';
+
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
 import AlertComponent from './components/AlertComponent/AlertComponent';  
+
 function App() {
   const [title, updateTitle] = useState(null);
   const [errorMessage, updateErrorMessage] = useState(null);
+
   return (
     <Router>
     <div className="App">
@@ -40,8 +43,10 @@ function App() {
           <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
         </div>
     </div>
+
     </Router>
+    
   );
 }
 
-export default App;
+export default (App);

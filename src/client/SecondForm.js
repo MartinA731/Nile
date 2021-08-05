@@ -1,7 +1,6 @@
 import React from "react";
 import TableDatePicker from "./dateSelect";
 import Location from "./Location";
-import Test from '../common/Test';
 
 
 

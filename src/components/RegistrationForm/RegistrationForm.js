@@ -36,6 +36,7 @@ function RegistrationForm(props) {
                             'successMessage' : 'Registration successful. Redirecting to home page..'
                         }))
                         localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
+                        localStorage.setItem("sharedData", "howdy m8");
                         if(state.client) {
                         redirectToClient();
                         }
@@ -74,8 +75,8 @@ function RegistrationForm(props) {
             state.client = true;
             state.merchant = false;
 
-            document.getElementById("client").className = "left button-selected";
-            document.getElementById("merchant").className = "right button-unselected";
+            document.getElementById("client").className = "left selected-button";
+            document.getElementById("merchant").className = "right unselected-button";
         }
     } 
     const handleMerchant = () => {
@@ -84,8 +85,8 @@ function RegistrationForm(props) {
             state.merchant = true;
             state.client = false;
             
-            document.getElementById("merchant").className = "right button-selected";
-            document.getElementById("client").className = "left button-unselected";
+            document.getElementById("merchant").className = "right selected-button";
+            document.getElementById("client").className = "left unselected-button";
         }
     } 
     const handleSubmitClick = (e) => {
@@ -136,9 +137,9 @@ function RegistrationForm(props) {
                     />
                 </div>
                 <div className="btnContainer" id="clientMerchButton">
-                    <span id="client" className="left button-unselected" onClick={handleClient}>Client</span>
+                    <span id="client" className="left unselected-button" onClick={handleClient}>Client</span>
 
-                    <span id="merchant" className="right button-unselected" onClick={handleMerchant}>Merchant</span>
+                    <span id="merchant" className="right unselected-button" onClick={handleMerchant}>Merchant</span>
                 </div>
 
                 <br></br>

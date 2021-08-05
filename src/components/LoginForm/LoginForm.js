@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import axios from 'axios';
 import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
-import "../../common/Button.css";
 import "../../common/Security.css";
 
 function LoginForm(props) {
@@ -34,8 +33,8 @@ function LoginForm(props) {
             state.client = true;
             state.merchant = false;
 
-            document.getElementById("client").className = "left button-selected";
-            document.getElementById("merchant").className = "right button-unselected";
+            document.getElementById("client").className = "left selected-button";
+            document.getElementById("merchant").className = "right unselected-button";
         }
     } 
     const handleMerchant = () => {
@@ -44,8 +43,8 @@ function LoginForm(props) {
             state.merchant = true;
             state.client = false;
             
-            document.getElementById("merchant").className = "right button-selected";
-            document.getElementById("client").className = "left button-unselected";
+            document.getElementById("merchant").className = "right selected-button";
+            document.getElementById("client").className = "left unselected-button";
         }
     } 
     const handleSubmitClick = (e) => {
@@ -66,6 +65,7 @@ function LoginForm(props) {
                         'successMessage' : 'Login successful. Redirecting to home page..'
                     }))
                     localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
+                    localStorage.setItem("sharedData", "howdy m8");
                     if(state.client) {
                         redirectToClient();
                         }
@@ -117,14 +117,17 @@ function LoginForm(props) {
                 <div className="form-check">
                 </div>
                 <div className="btnContainer" id="clientMerchButton">
-                    <span id="client" class="left button-unselected"
+                    <span id="client" className="left unselected-button"
                         onClick={handleClient}>
                     Client</span>
 
-                    <span id="merchant" class="right button-unselected"
+                    <span id="merchant" className="right unselected-button"
                         onClick={handleMerchant}>
                     Merchant</span>
-                </div> <br></br> <br></br>
+                </div>
+
+            <br></br>
+            <br></br>
                 <button 
                     type="submit" 
                     className="btn btn-primary"

@@ -1,5 +1,4 @@
-import React,{ useEffect } from 'react'; //for later security
-import { withRouter } from 'react-router-dom';
+import React from 'react'; //for later security
 import './Merchant.css';
 import '../common/Button.css';
 import '../common/TopBar.css';
@@ -26,7 +25,6 @@ function Merchant(props) {
             btn.style.setProperty("--b", 35);
         }
     }
-
     return (
         <div>
           <meta charSet="utf-8" />
@@ -35,6 +33,8 @@ function Merchant(props) {
           <link rel="stylesheet" href="Merchant.css" />
           <link rel="stylesheet" href="../Common/Button.css" />
           <link rel="stylesheet" href="../Common/TopBar.css" />
+
+          <h>{localStorage.getItem("sharedData")}</h>
  
           <div className="placeholder">
             {/* header bar */}
@@ -73,6 +73,5 @@ function Merchant(props) {
       );
 }
 
+export default Merchant;
 
-
-export default withRouter(Merchant);
