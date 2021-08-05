@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm/LoginForm';
 import RegistrationForm from './components/RegistrationForm/RegistrationForm';
 import Client from './client/Client';
 import Merchant from './merchant/Merchant';
+import Settings from './components/Settings/Settings';
 import PrivateRoute from './utils/PrivateRoute';
 
 import {
@@ -39,6 +40,7 @@ function App() {
             <PrivateRoute path="/merchant">
             <Merchant/>
             </PrivateRoute>
+            <PrivateRoute path="/settings" component={Settings}/>
           </Switch>
           <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
         </div>
