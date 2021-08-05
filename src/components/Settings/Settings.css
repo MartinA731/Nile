@@ -1,0 +1,51 @@
+.settings {
+    margin: 1em;
+    width: 75vw;
+    border: 1px solid gray;
+    border-radius: 2%;
+}
+
+/* for each setting row */
+.setting {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid gray;
+    padding: 1em;
+}
+
+/* first row can't have border */
+.first {
+    border: none;
+}
+
+.setting .name {
+    display: inline-block;
+    width: 25%;
+    text-align: left;
+}
+
+.setting .flex-container {
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+}
+
+.flex-container span, img {
+    margin: 0 1em;
+    line-height: 100%;
+}
+
+/* .flex-container span {
+    display: inline-flex;
+    align-items: center;
+    line-height: 100%;
+} */
+
+.flex-container img {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+	background-color: #4472c4;
+    border-radius: 50%;
+}

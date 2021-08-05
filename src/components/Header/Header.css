@@ -13,6 +13,7 @@
 }
 
 .navbar-custom img {
+    margin: 0;
     float: left;
     width: 60px;
     height: 60px;
@@ -22,10 +23,11 @@
     position: relative;
     display: flex;
     align-items: center;
+    margin-right: 25px;
 }
 
 .account .avatar {
-    margin-right: 11px;
+    margin-right: 10px;
     width: 25px;
     height: 25px;
     /* place holder color */
