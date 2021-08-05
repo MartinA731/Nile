@@ -13,16 +13,17 @@
 }
 
 .navbar-custom img {
+    margin: 0;
     float: left;
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
 }
 
 .navbar-custom .account {
     position: relative;
     display: flex;
     align-items: center;
-    margin-right: 15px;
+    margin-right: 25px;
 }
 
 .account .avatar {
@@ -32,6 +33,14 @@
     /* place holder color */
     background-color: orange;
     border-radius: 50%;
+}
+
+.navbar-custom .page {
+    position: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 30px;
+
 }
 
 /* initally hidden */
