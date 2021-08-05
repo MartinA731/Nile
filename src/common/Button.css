@@ -67,6 +67,13 @@ span.selected-button {
 	color: #4472c4;
 }
 
+span.white-button {
+    --r: 255;
+    --g: 255;
+    --b: 255;
+    color: black;
+}
+
 /* contains all the button that are in a row */
 div.btnContainer {
     display: flex;
