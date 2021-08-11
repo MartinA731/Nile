@@ -19,11 +19,8 @@ class Client extends React.Component {
       }
     }
     render() {
-    //localStorage.setItem("sharedData", "FIDOISJODFJOI");
     return(
         <div>
-          {localStorage.getItem("sharedData")} <br></br>
-          {localStorage.getItem("login_access_token")}
           {/* Request now button */}
           <RequestNow></RequestNow> 
 
@@ -37,8 +34,6 @@ class Client extends React.Component {
           <SecondForm></SecondForm>
 
           <ThirdForm></ThirdForm>
-
-          {this.props.location && this.props.location.state && this.props.location.state}
 
         </div>
       )

@@ -36,7 +36,6 @@ function RegistrationForm(props) {
                             'successMessage' : 'Registration successful. Redirecting to home page..'
                         }))
                         localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
-                        localStorage.setItem("sharedData", "howdy m8");
                         if(state.client) {
                         redirectToClient();
                         }

@@ -12,6 +12,8 @@ class SecondForm extends React.Component {
   }
   render() {
   const closeSecondForm = () => {
+    const num = JSON.parse(localStorage.getItem("orderNum"));
+    localStorage.setItem("orderNum", JSON.parse(num + 1));
     document.getElementById("secondForm").style.display = "none";
     window.formOpen = false;
   };

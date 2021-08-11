@@ -20,10 +20,17 @@ function LoginForm(props) {
         }))
     }
     const redirectToClient = () => {
-        props.updateTitle('Client')
+        localStorage.removeItem("clientRequests");
+        localStorage.removeItem("orderNum");
+        localStorage.removeItem("toMerch");
+        const orderNum = localStorage.getItem("orderNum");
+        if(orderNum === undefined || orderNum === null) localStorage.setItem("orderNum", 0);
+        props.updateTitle('Client');
         props.history.push('/client');
     }
     const redirectToMerchant = () => {
+        localStorage.removeItem("merchants");
+        localStorage.setItem("userEmail", state.email);
         props.updateTitle('Merchant')
         props.history.push('/merchant');
     }
@@ -32,7 +39,6 @@ function LoginForm(props) {
         if(state.client === false) {
             state.client = true;
             state.merchant = false;
-
             document.getElementById("client").className = "left selected-button";
             document.getElementById("merchant").className = "right unselected-button";
         }
@@ -42,7 +48,6 @@ function LoginForm(props) {
         if(state.merchant === false) {
             state.merchant = true;
             state.client = false;
-            
             document.getElementById("merchant").className = "right selected-button";
             document.getElementById("client").className = "left unselected-button";
         }
@@ -65,8 +70,8 @@ function LoginForm(props) {
                         'successMessage' : 'Login successful. Redirecting to home page..'
                     }))
                     localStorage.setItem(ACCESS_TOKEN_NAME,response.data.token);
-                    localStorage.setItem("sharedData", "howdy m8");
                     if(state.client) {
+                        localStorage.setItem("clientUserInfo", state.email);
                         redirectToClient();
                         }
                     else if(state.merchant) {

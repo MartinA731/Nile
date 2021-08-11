@@ -4,10 +4,19 @@ import React, {useRef} from "react";
 function FirstForm() {
     const closeFirstForm = () => {
         document.getElementById("firstForm").style.display = "none";
+        window.formOpen = false;
       };
     const openSecondForm = () => {
         document.getElementById("secondForm").style.display = "block";
         document.getElementById("firstForm").style.display = "none";
+        const text = document.getElementById("description").value;
+        var oldVal = localStorage.getItem("clientRequests");
+        if(oldVal === undefined || oldVal === null) localStorage.setItem("clientRequests", JSON.stringify([{description : text, lon : 0, lat : 0, accepted : false}]) );
+        else {
+            var item = JSON.parse(oldVal);
+            item.push({description : text, lon : 0, lat : 0, accepted : false});
+            localStorage.setItem("clientRequests", JSON.stringify(item));
+        }
       };
     //next 3 arrow func toggles which button for size is selected
     const handleSize = (e) => {
@@ -36,15 +45,18 @@ function FirstForm() {
         <div className="form-popup" id="firstForm">
             <form action="/action_page.php" className="form-container">
                 <h4>Request Address</h4>
-                <div className="input-container">
+                <label>
+                    <b>Details</b>
+                </label> <br />
+                <div className="input-container" id="subtitle-space">
                     <div className="hidden" aria-hidden="true">Enter Product Details or SKU padding</div>
-                    <input type="text" placeholder="Enter Product Details or SKU" name="email" required/>
+                    <input type="text" placeholder="Enter Product Details or SKU" id="description" required/>
                 </div>
                 <br />
-                <label htmlFor="psw">
+                <label>
                     <b>Size</b>
                 </label>
-                <div className="btnContainer" ref={btnContainer}>
+                <div className="btnContainer" ref={btnContainer}  id="subtitle-space">
                     <span value="small" className="left unselected-button" onClick={handleSize}>Small</span>
                     <span value="medium" className="mid unselected-button" onClick={handleSize}>Medium</span>
                     <span value="large" className="right unselected-button" onClick={handleSize}>Large</span>

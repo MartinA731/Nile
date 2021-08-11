@@ -14,6 +14,14 @@ const Location = () => {
         setStatus(null);
         setLat(position.coords.latitude);
         setLng(position.coords.longitude);
+
+        const orderNum = localStorage.getItem("orderNum");
+        var oldVal = JSON.parse(localStorage.getItem("clientRequests"));
+        var elem = oldVal[orderNum];
+        elem.lon = position.coords.longitude;
+        elem.lat = position.coords.latitude;
+        oldVal[orderNum] =  elem;
+        localStorage.setItem("clientRequests", JSON.stringify(oldVal));
       }, () => {
         setStatus('Unable to retrieve your location');
       });
@@ -22,7 +30,7 @@ const Location = () => {
 
   return (
     <div className="App">
-      <button type="button" onClick={getLocation}>Get Location</button>
+      <button type="button" onClick={getLocation}>Share Location</button>
       <p>{status}</p>
       {lat && <p>Latitude: {lat}</p>}
       {lng && <p>Longitude: {lng}</p>}
