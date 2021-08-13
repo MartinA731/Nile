@@ -23,6 +23,7 @@ function LoginForm(props) {
         localStorage.removeItem("clientRequests");
         localStorage.removeItem("orderNum");
         localStorage.removeItem("toMerch");
+        localStorage.setItem("clEmail", state.email);
         const orderNum = localStorage.getItem("orderNum");
         if(orderNum === undefined || orderNum === null) localStorage.setItem("orderNum", 0);
         props.updateTitle('Client');
@@ -30,7 +31,8 @@ function LoginForm(props) {
     }
     const redirectToMerchant = () => {
         localStorage.removeItem("merchants");
-        localStorage.setItem("userEmail", state.email);
+        localStorage.setItem("merEmail", state.email);
+        localStorage.setItem("acceptedTransfers", JSON.stringify(["", "", ""]));
         props.updateTitle('Merchant')
         props.history.push('/merchant');
     }

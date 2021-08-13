@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
+import './Merchant.css';
+import '../common/Button.css';
+import '../common/TopBar.css';
 
-
+function emailInMerchants() {
+  var merchants = JSON.parse(localStorage.getItem("merchants"));
+  var length = merchants.length;
+  for(var i = 0; i < length; i++) {
+    if(merchants[i].id === localStorage.getItem("merEmail")) return false;
+  }
+  return true;
+}
 
 function LinkClient(props) {
     const [lat, setLat] = useState(null);
@@ -14,6 +24,7 @@ function LinkClient(props) {
             //change text
             btn.innerHTML = "Receiving off";
             //change color
+            btn.style.color = "purple";
             btn.style.setProperty("--r", 171);
             btn.style.setProperty("--g", 171);
             btn.style.setProperty("--b", 171);
@@ -22,6 +33,7 @@ function LinkClient(props) {
             //change text
             btn.innerHTML = "Receiving on";
             //change color
+            btn.style.color = "blue";
             btn.style.setProperty("--r", 235);
             btn.style.setProperty("--g", 133);
             btn.style.setProperty("--b", 35);
@@ -40,12 +52,14 @@ function LinkClient(props) {
           setLng(position.coords.longitude);
           var oldVal = localStorage.getItem("merchants");
           if(oldVal === undefined || oldVal === null) {
-              localStorage.setItem("merchants", JSON.stringify([{id : localStorage.getItem("userEmail"), lon : position.coords.longitude, lat : position.coords.latitude, full : false, value: ""}]) );
+              localStorage.setItem("merchants", JSON.stringify([{id : localStorage.getItem("merEmail"), lon : position.coords.longitude, lat : position.coords.latitude, full : false, value: []}]) );
           }
           else {
-              var item = JSON.parse(oldVal);
-              item.push({id : localStorage.getItem("userEmail"), lon : lng, lat : lat, full : false, value : ""});
-              localStorage.setItem("merchants", JSON.stringify(item));
+              if(emailInMerchants()) {
+                var item = JSON.parse(oldVal);
+                item.push({id : localStorage.getItem("merEmail"), lon : lng, lat : lat, full : false, value : []});
+                localStorage.setItem("merchants", JSON.stringify(item));
+              }
           }
         }, () => {
           setStatus('Unable to retrieve your location');
@@ -56,10 +70,7 @@ function LinkClient(props) {
 
     return (
         <div>
-            <span className="button receiving" onClick={getLocation}>Receiving on</span>
-            <p>{status}</p>
-            {lat && <p>Latitude: {lat}</p>}
-            {lng && <p>Longitude: {lng}</p>}
+            <span className="button receiving" onClick={getLocation}>Receiving off</span>
 
         </div>
       );

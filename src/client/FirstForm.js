@@ -11,10 +11,10 @@ function FirstForm() {
         document.getElementById("firstForm").style.display = "none";
         const text = document.getElementById("description").value;
         var oldVal = localStorage.getItem("clientRequests");
-        if(oldVal === undefined || oldVal === null) localStorage.setItem("clientRequests", JSON.stringify([{description : text, lon : 0, lat : 0, accepted : false}]) );
+        if(oldVal === undefined || oldVal === null) localStorage.setItem("clientRequests", JSON.stringify([{description : text, lon : 0, lat : 0, email : localStorage.getItem("clEmail"), accepted: false}]) );
         else {
             var item = JSON.parse(oldVal);
-            item.push({description : text, lon : 0, lat : 0, accepted : false});
+            item.push({description : text, lon : 0, lat : 0, email : localStorage.getItem("clEmail"), accepted: false});
             localStorage.setItem("clientRequests", JSON.stringify(item));
         }
       };

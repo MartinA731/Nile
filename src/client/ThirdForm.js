@@ -28,19 +28,40 @@ function ThirdForm() {
     document.getElementById("thirdForm").style.display = "none";
     window.formOpen = false;
   };
-  const selectMerchant = (cLon, cLat) => {
+
+  const selectMerchant = (client, allClients, cIndex) => {
     var merchants = JSON.parse(localStorage.getItem("merchants"));
+    if(!merchants) merchants = [];
     var arrLen = merchants.length;
+    var index = -1;
     for(var i = 0; i < arrLen; i++) {
-      const lon = JSON.parse(localStorage.getItem("merchants"))[i].lon;
-      const lat = JSON.parse(localStorage.getItem("merchants"))[i].lat;
-      var tempDistance = calcCrow(lat,lon,cLat,cLon);
-      if (i === 0) var distance = tempDistance;
-      else distance = Math.min(distance, tempDistance);
+      if(merchants[i].full) {
+        continue;
+      }
+      const lon = merchants[i].lon;
+      const lat = merchants[i].lat;
+      var tempDistance = calcCrow(lat,lon,client.lat,client.lon);
+      if (i === 0) {
+        var distance = tempDistance;
+        index = 0;
+      }
+      else {
+        distance = Math.min(distance, tempDistance);
+        index = i;
+      }
     }
-    console.log(distance);
-    return distance;
+    if(index !== -1) {
+      client.accepted = true;
+      merchants[index].value.push(client);
+      if(merchants[index].value.length >= 3) {
+        merchants[index].full = true;
+      }
+      allClients[cIndex] = client;
+      localStorage.setItem("toMerch", JSON.stringify(allClients));
+    }
+    localStorage.setItem("merchants", JSON.stringify(merchants));
   }
+
   const submitClient = () => {
     document.getElementById("thirdForm").style.display = "none";
     window.formOpen = false;
@@ -50,16 +71,17 @@ function ThirdForm() {
     var oldArr = JSON.parse(oldClient);
     if(newClient === undefined || newClient === null) {
       localStorage.setItem("toMerch", JSON.stringify([oldArr[num]]));
-      selectMerchant(oldArr[num].lon, oldArr[num].lat);
+      selectMerchant(oldArr[num], JSON.parse(localStorage.getItem("toMerch")), num);
     }
     else {
       newClient = JSON.parse(newClient);
       newClient.push(oldArr[num]);
       localStorage.setItem("toMerch", JSON.stringify(newClient));
-      selectMerchant((oldArr[num].lon), (oldArr[num].lat));
+      selectMerchant(oldArr[num], JSON.parse(localStorage.getItem("toMerch")), num);
     }
     localStorage.setItem("orderNum", JSON.parse(num + 1));
-    console.log(localStorage.getItem("clientRequests"));
+    window.location.reload();
+    //console.log(localStorage.getItem("clientRequests"));
     console.log(localStorage.getItem("toMerch"));
     console.log(localStorage.getItem("orderNum"));
     console.log(localStorage.getItem("merchants"));
