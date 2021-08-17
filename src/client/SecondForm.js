@@ -16,6 +16,7 @@ class SecondForm extends React.Component {
     localStorage.setItem("orderNum", JSON.parse(num + 1));
     document.getElementById("secondForm").style.display = "none";
     window.formOpen = false;
+    window.location.reload();
   };
   const openThirdForm = () => {
     document.getElementById("thirdForm").style.display = "block";

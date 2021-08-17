@@ -3,6 +3,7 @@ import './Merchant.css';
 import '../common/Button.css';
 import '../common/TopBar.css';
 import LinkClient from './LinkClient';
+import { withRouter } from "react-router-dom";
 
 
 function Merchant(props) {
@@ -11,12 +12,10 @@ function Merchant(props) {
     var acceptedTransfers = (localStorage.getItem("acceptedTransfers"));
     var arr = JSON.parse(localStorage.getItem("acceptedTransfers"));
     arr[num] = description;
-    console.log(arr);
     localStorage.setItem("acceptedTransfers", JSON.stringify(arr));
     window.location.reload(); 
-    console.log(localStorage.getItem("acceptedTransfers"));
   }
-  const userEmail = localStorage.getItem("merEmail");
+  const userEmail = props.location.state.login;
 
   var transactionOffers = (num) => {
     if(localStorage.getItem("merchants") === undefined || localStorage.getItem("merchants") === null) {
@@ -46,6 +45,7 @@ function Merchant(props) {
     } 
     return <button type="button" onClick={() => acceptTransfer(num, transactions[num])}> {returnValue} </button>
   }
+
     return (
         <div>
           <meta charSet="utf-8" />
@@ -92,5 +92,5 @@ function Merchant(props) {
       );
 }
 
-export default Merchant;
+export default withRouter(Merchant);
 

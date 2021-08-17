@@ -1,7 +1,11 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 
-function Boxes() {
-  const userEmail = localStorage.getItem("clEmail");
+
+function Boxes(props) {
+  console.log(localStorage.getItem("toMerch"));
+  console.log(localStorage.getItem("merchants"));
+  const userEmail = props.location.state.login;
   var allTransactions = () => {
     if(localStorage.getItem("toMerch") === undefined || localStorage.getItem("toMerch") === null) {
       var viableClients = [];
@@ -49,4 +53,4 @@ function Boxes() {
   );
 }
 
-export default Boxes;
+export default withRouter(Boxes);

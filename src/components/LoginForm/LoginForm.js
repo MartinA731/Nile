@@ -4,6 +4,15 @@ import {API_BASE_URL, ACCESS_TOKEN_NAME} from '../../constants/apiContants';
 import { withRouter } from "react-router-dom";
 import "../../common/Security.css";
 
+function newMerchUser(thisEmail) {
+    var merchants = JSON.parse(localStorage.getItem("merchants"));
+    var length = merchants.length;
+    for(var i = 0; i < length; i++) {
+      if(merchants[i].id === thisEmail) return false;
+    }
+    return true;
+  }
+
 function LoginForm(props) {
     const [state , setState] = useState({
         email : "",
@@ -23,18 +32,36 @@ function LoginForm(props) {
         localStorage.removeItem("clientRequests");
         localStorage.removeItem("orderNum");
         localStorage.removeItem("toMerch");
-        localStorage.setItem("clEmail", state.email);
         const orderNum = localStorage.getItem("orderNum");
         if(orderNum === undefined || orderNum === null) localStorage.setItem("orderNum", 0);
         props.updateTitle('Client');
-        props.history.push('/client');
+        props.history.push({
+            pathname:"/client",
+            state:{
+                login:state.email
+             }
+           });
     }
     const redirectToMerchant = () => {
-        localStorage.removeItem("merchants");
-        localStorage.setItem("merEmail", state.email);
+        //localStorage.removeItem("merchants");
+        var oldVal = localStorage.getItem("merchants");
+        if(oldVal === undefined || oldVal === null) {
+            localStorage.setItem("merchants", JSON.stringify([{id : state.email, lon : -1, 
+                                              lat : -1, full : false, accepting : true, value: []}]));
+        }
+        else if(newMerchUser(state.email)){
+            var item = JSON.parse(oldVal);
+            item.push({id : state.email, lon : -1, lat : -1, full : false, accepting: true, value : []});
+            localStorage.setItem("merchants", JSON.stringify(item));
+            }
         localStorage.setItem("acceptedTransfers", JSON.stringify(["", "", ""]));
         props.updateTitle('Merchant')
-        props.history.push('/merchant');
+        props.history.push({
+            pathname:"/merchant",
+            state:{
+                login:state.email
+             }
+           });
     }
     const handleClient = () => {
         //Only select if client is unselected

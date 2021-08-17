@@ -27,6 +27,7 @@ function ThirdForm() {
     localStorage.setItem("orderNum", JSON.parse(num + 1));
     document.getElementById("thirdForm").style.display = "none";
     window.formOpen = false;
+    window.location.reload();
   };
 
   const selectMerchant = (client, allClients, cIndex) => {
@@ -35,7 +36,7 @@ function ThirdForm() {
     var arrLen = merchants.length;
     var index = -1;
     for(var i = 0; i < arrLen; i++) {
-      if(merchants[i].full) {
+      if(merchants[i].full || (!merchants[i].accepting)) {
         continue;
       }
       const lon = merchants[i].lon;
@@ -81,10 +82,6 @@ function ThirdForm() {
     }
     localStorage.setItem("orderNum", JSON.parse(num + 1));
     window.location.reload();
-    //console.log(localStorage.getItem("clientRequests"));
-    console.log(localStorage.getItem("toMerch"));
-    console.log(localStorage.getItem("orderNum"));
-    console.log(localStorage.getItem("merchants"));
   };
 
   const totalCost = "$7.31 for now";

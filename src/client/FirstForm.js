@@ -1,20 +1,26 @@
 import React, {useRef} from "react";
+import { withRouter } from "react-router-dom";
 
 
-function FirstForm() {
+
+function FirstForm(props) {
+    const userEmail = props.location.state.login;
+    console.log(userEmail);
     const closeFirstForm = () => {
         document.getElementById("firstForm").style.display = "none";
         window.formOpen = false;
+        window.location.reload();
       };
     const openSecondForm = () => {
         document.getElementById("secondForm").style.display = "block";
         document.getElementById("firstForm").style.display = "none";
         const text = document.getElementById("description").value;
         var oldVal = localStorage.getItem("clientRequests");
-        if(oldVal === undefined || oldVal === null) localStorage.setItem("clientRequests", JSON.stringify([{description : text, lon : 0, lat : 0, email : localStorage.getItem("clEmail"), accepted: false}]) );
+        if(oldVal === undefined || oldVal === null) localStorage.setItem("clientRequests", JSON.stringify([{description : text, 
+                                lon : 0, lat : 0, email : userEmail, accepted: false}]) );
         else {
             var item = JSON.parse(oldVal);
-            item.push({description : text, lon : 0, lat : 0, email : localStorage.getItem("clEmail"), accepted: false});
+            item.push({description : text, lon : 0, lat : 0, email : userEmail, accepted: false});
             localStorage.setItem("clientRequests", JSON.stringify(item));
         }
       };
@@ -83,4 +89,4 @@ function FirstForm() {
     );
 }   
 
-export default FirstForm;
+export default withRouter(FirstForm);

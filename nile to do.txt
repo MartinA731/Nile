@@ -1,0 +1,15 @@
+Client: {description, lon, lat, email, accepted}
+Merchant: {id, lon, lat, full, accepting, value} //set in linkClient.js
+
+
+Start it as off, and once you click if it's on id
+
+
+Initialize merchant in login, change in linkClient
+
+
+Remove localStorage.getItem("merEmail"); and same for client
+
+Youre currently clearing merchant data when logging out and clearing client data when logging in
+
+Copy everything from login to registration
