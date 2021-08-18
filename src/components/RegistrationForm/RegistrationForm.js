@@ -12,7 +12,9 @@ function RegistrationForm(props) {
         confirmPassword: "",
         client : false,
         merchant : false,
-        successMessage: null
+        successMessage: null,
+        address: "",
+        showAddress : false,
     })
     const handleChange = (e) => {
         const {id , value} = e.target   
@@ -21,6 +23,8 @@ function RegistrationForm(props) {
             [id] : value
         }))
     }
+    console.log(localStorage.getItem("merchants"));
+    console.log(localStorage.getItem("toMerch"));
     const sendDetailsToServer = () => {
         if(state.email.length && state.password.length) {
             props.showError(null);
@@ -58,35 +62,48 @@ function RegistrationForm(props) {
     }
     const redirectToClient = () => {
         props.updateTitle('Client')
-        props.history.push('/client');
+        props.history.push({
+            pathname:"/client",
+            state:{
+                login:state.email
+             }
+           });
     }
     const redirectToMerchant = () => {
+        var oldVal = localStorage.getItem("merchants");
+        if(oldVal === undefined || oldVal === null) {
+            localStorage.setItem("merchants", JSON.stringify([{id : state.email, lon : -1, 
+                                              lat : -1, full : false, accepting : true, address : state.address, value: []}]));
+        }
+        var item = JSON.parse(oldVal);
+        item.push({id : state.email, lon : -1, lat : -1, full : false, accepting: true, address : state.address, value : []});
+        localStorage.setItem("merchants", JSON.stringify(item));
+            
         props.updateTitle('Merchant')
-        props.history.push('/merchant');
+        props.history.push({
+            pathname:"/merchant",
+            state:{
+                login:state.email
+             }
+           });
     }
     const redirectToLogin = () => {
         props.updateTitle('Login')
         props.history.push('/login'); 
     }
     const handleClient = () => {
-        //Only select if client is unselected
-        if(state.client === false) {
-            state.client = true;
-            state.merchant = false;
-
-            document.getElementById("client").className = "left selected-button";
-            document.getElementById("merchant").className = "right unselected-button";
-        }
+        setState({...state, client : true, merchant : false, showAddress : false});
+        state.client = true;
+        state.merchant = false;
+        document.getElementById("client").className = "left selected-button";
+        document.getElementById("merchant").className = "right unselected-button";
     } 
     const handleMerchant = () => {
-        //Do nothing if merchant is already selected
-        if(state.merchant === false) {
-            state.merchant = true;
-            state.client = false;
-            
-            document.getElementById("merchant").className = "right selected-button";
-            document.getElementById("client").className = "left unselected-button";
-        }
+        setState({...state, merchant : true, client : false, showAddress : true});
+        state.merchant = true;
+        state.client = false;
+        document.getElementById("merchant").className = "right selected-button";
+        document.getElementById("client").className = "left unselected-button"; 
     } 
     const handleSubmitClick = (e) => {
         e.preventDefault();
@@ -115,7 +132,7 @@ function RegistrationForm(props) {
                 />
                 <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
-                <div className="form-group text-left">
+                <div className="form-group text-left" id="passSpacing">
                     <label htmlFor="exampleInputPassword1">Password</label>
                     <input type="password" 
                         className="form-control" 
@@ -125,7 +142,7 @@ function RegistrationForm(props) {
                         onChange={handleChange} 
                     />
                 </div>
-                <div className="form-group text-left">
+                <div className="form-group text-left" id="passSpacing">
                     <label htmlFor="exampleInputPassword1">Confirm Password</label>
                     <input type="password" 
                         className="form-control" 
@@ -134,6 +151,17 @@ function RegistrationForm(props) {
                         value={state.confirmPassword}
                         onChange={handleChange} 
                     />
+                </div>
+                
+                <div className="form-group text-left" id="passSpacing" style={{display: state.showAddress ? 'block' : 'none' }}>
+                <label htmlFor="exampleInputPassword1">Address</label>
+                <input 
+                    className="form-control" 
+                    id="address" 
+                    placeholder="Enter Address"
+                    value={state.address}
+                    onChange={handleChange} 
+                />
                 </div>
                 <div className="btnContainer" id="clientMerchButton">
                     <span id="client" className="left unselected-button" onClick={handleClient}>Client</span>

@@ -29,9 +29,6 @@ function LoginForm(props) {
         }))
     }
     const redirectToClient = () => {
-        localStorage.removeItem("clientRequests");
-        localStorage.removeItem("orderNum");
-        localStorage.removeItem("toMerch");
         const orderNum = localStorage.getItem("orderNum");
         if(orderNum === undefined || orderNum === null) localStorage.setItem("orderNum", 0);
         props.updateTitle('Client');
@@ -43,7 +40,6 @@ function LoginForm(props) {
            });
     }
     const redirectToMerchant = () => {
-        //localStorage.removeItem("merchants");
         var oldVal = localStorage.getItem("merchants");
         if(oldVal === undefined || oldVal === null) {
             localStorage.setItem("merchants", JSON.stringify([{id : state.email, lon : -1, 
@@ -54,7 +50,6 @@ function LoginForm(props) {
             item.push({id : state.email, lon : -1, lat : -1, full : false, accepting: true, value : []});
             localStorage.setItem("merchants", JSON.stringify(item));
             }
-        localStorage.setItem("acceptedTransfers", JSON.stringify(["", "", ""]));
         props.updateTitle('Merchant')
         props.history.push({
             pathname:"/merchant",

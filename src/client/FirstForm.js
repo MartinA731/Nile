@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 
 function FirstForm(props) {
     const userEmail = props.location.state.login;
-    console.log(userEmail);
     const closeFirstForm = () => {
         document.getElementById("firstForm").style.display = "none";
         window.formOpen = false;
@@ -17,10 +16,10 @@ function FirstForm(props) {
         const text = document.getElementById("description").value;
         var oldVal = localStorage.getItem("clientRequests");
         if(oldVal === undefined || oldVal === null) localStorage.setItem("clientRequests", JSON.stringify([{description : text, 
-                                lon : 0, lat : 0, email : userEmail, accepted: false}]) );
+                                lon : 0, lat : 0, email : userEmail, accepted: "none"}]) );
         else {
             var item = JSON.parse(oldVal);
-            item.push({description : text, lon : 0, lat : 0, email : userEmail, accepted: false});
+            item.push({description : text, lon : 0, lat : 0, email : userEmail, accepted: "none"});
             localStorage.setItem("clientRequests", JSON.stringify(item));
         }
       };

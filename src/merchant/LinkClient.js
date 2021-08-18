@@ -33,9 +33,7 @@ function getReceiving(storageStr, keyName, merchEmail) {
 
 function LinkClient(props) {
     var merchEmail = props.location.state.login;
-    const [lat, setLat] = useState(null);
-    const [lng, setLng] = useState(null);
-    const [status, setStatus] = useState(null);
+    
 
     //toggles style of "Receiving on/off" button when clicked
     const toggleBtn = () => {
@@ -62,33 +60,24 @@ function LinkClient(props) {
         }
     }
   
-    const getLocation = () => {
+    function getLocation() {
       if (!navigator.geolocation) {
-        setStatus('Geolocation is not supported by your browser');
+        alert('Nile needs your location to work. Please allow access to location');
       } else {
-        setStatus('Locating...');
         navigator.geolocation.getCurrentPosition((position) => {
-          setStatus(null);
-          setLat(position.coords.latitude);
-          setLng(position.coords.longitude);
           changeValue("merchants", "lon", position.coords.longitude, merchEmail);
           changeValue("merchants", "lat", position.coords.latitude, merchEmail);
-          toggleBtn();
-          //console.log(localStorage.getItem("merchants"));
-        }, () => {
-          setStatus('Unable to retrieve your location');
+          //toggleBtn();
+        } , () => {
+          alert('Nile needs your location to work. Please allow access to location');
         });
       }
     };
-    
-    //console.log(localStorage.getItem("merchants"))
-    //console.log(merchEmail);
-    console.log(props.location.state.login);
-
+    getLocation();
 
     return (
         <div>
-            <span className="button receiving" onClick={getLocation}>{getReceiving("merchants", "accepting", merchEmail)}</span>
+            <span className="button receiving" onClick={toggleBtn}>{getReceiving("merchants", "accepting", merchEmail)}</span>
         </div>
       );
 }

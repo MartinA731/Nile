@@ -37,7 +37,6 @@ function Header(props) {
         window.location.reload();
     }
     function handleLogout() {
-        localStorage.removeItem("merchants");
         window.location.reload(); 
         localStorage.removeItem(ACCESS_TOKEN_NAME)
         props.history.push('/login')

@@ -8,44 +8,74 @@ import { withRouter } from "react-router-dom";
 
 function Merchant(props) {
 
-  const acceptTransfer = (num, description) => {
-    var acceptedTransfers = (localStorage.getItem("acceptedTransfers"));
-    var arr = JSON.parse(localStorage.getItem("acceptedTransfers"));
-    arr[num] = description;
-    localStorage.setItem("acceptedTransfers", JSON.stringify(arr));
-    window.location.reload(); 
-  }
   const userEmail = props.location.state.login;
 
-  var transactionOffers = (num) => {
-    if(localStorage.getItem("merchants") === undefined || localStorage.getItem("merchants") === null) {
-      var viableMerchants = [];
+
+  const adjustClient = (clientObj) => {
+    const clientEmail = clientObj.email;
+    var oldClient = JSON.parse(localStorage.getItem("toMerch"));
+    const length = oldClient.length;
+    for(var i = 0; i < length; i++) {
+      var request = oldClient[i];
+      if(request.email === clientEmail && request.description === clientObj.description) {
+        oldClient[i] = clientObj;
+      } 
     }
-    else viableMerchants = JSON.parse(localStorage.getItem("merchants"));
-    var length = viableMerchants.length;
-    var transactions = []
-    var thisMerchant;
-    for(var i = 0; i < length; i++){
-      if(viableMerchants[i].id === userEmail){
-        thisMerchant = viableMerchants[i];
-      }
-    }
-    if(thisMerchant !== undefined) {
-      for(var j = 0; j < thisMerchant.value.length; j++) {
-        transactions.push(thisMerchant.value[j].description);
-      }
-    }
-    while(transactions.length < 3) {
-      transactions.push("");
-    }
-    if(transactions[num] === "") var returnValue = "";
-    else {
-      if(JSON.parse(localStorage.getItem("acceptedTransfers"))[num] !== "") return ""
-      else returnValue = transactions[num] + ".    click to accept";
-    } 
-    return <button type="button" onClick={() => acceptTransfer(num, transactions[num])}> {returnValue} </button>
+    localStorage.setItem("toMerch", JSON.stringify(oldClient));
   }
 
+  const transactions = (transactionName, clientIndex) => {
+    var merchants = JSON.parse(localStorage.getItem("merchants"));
+    var length = merchants.length;
+    var transactionOffers = [], transactionsProg = [], transactionsDone = [];
+    for(var i = 0; i < length; i++) {
+      const merch = merchants[i];
+      if(merch.id === userEmail) { 
+        var thisMerchIndex = i; 
+        var allTransactions = merch.value;
+        const valueLen = allTransactions.length;
+        for(var j = 0; j < valueLen; j++) { //second for loop will only run once
+          if(allTransactions[j].accepted === "passed") transactionOffers.push(allTransactions[j].description); //change to allTransactions[j] if you want all the info not just description
+          else if(allTransactions[j].accepted === "prog") transactionsProg.push(allTransactions[j].description);
+          else if(allTransactions[j].accepted === "done") transactionsDone.push(allTransactions[j].description);
+        }
+      }
+    }
+    const possibleReturns = {offers: transactionOffers, inProgress : transactionsProg, doneTran : transactionsDone};
+    const returnList = possibleReturns[transactionName];
+    if(clientIndex + 1 > returnList.length) return "";
+    else if(transactionName === "offers") var returnValue = "Product: " + returnList[clientIndex] + " click to accept";
+    else if(transactionName === "inProgress") returnValue = "Product: " + returnList[clientIndex] + " click if transaction is over";
+    else if(transactionName === "doneTran") returnValue = "Product: " + returnList[clientIndex] + " transaction is over";
+    return <button type="button" onClick={() => moveForward(thisMerchIndex, clientIndex, transactionName)}> {returnValue} </button>
+  }
+  
+  const findIndex = (index, transName, thisMerchant) => {
+    const length = thisMerchant.value.length;
+    if(transName === "offers") var temp = "passed"; else if (transName === "inProgress") temp = "prog"; else temp = "done";
+    var counter = 0;
+    for (var i = 0; i < length; i++) {
+      if(thisMerchant.value[i].accepted ===  temp) {
+        if(counter === index) return i;
+        counter++;
+      }
+    }
+  }
+
+  const moveForward = (merchIndex, clientIndex,transactionName) => {
+    var merchants = JSON.parse(localStorage.getItem("merchants"));
+    var thisMerchant = merchants[merchIndex];
+    var realIndex = findIndex(clientIndex, transactionName, thisMerchant);
+    var thisClient = thisMerchant.value[realIndex];
+    if(thisClient.accepted === "passed") thisClient.accepted = "prog";
+    else if(thisClient.accepted === "prog") thisClient.accepted = "done";
+    merchants[merchIndex].value[realIndex] = thisClient;
+    adjustClient(merchants[merchIndex].value[realIndex]);
+    localStorage.setItem("merchants", JSON.stringify(merchants));
+    window.location.reload(); 
+  }
+  console.log(localStorage.getItem("merchants"));
+    console.log(localStorage.getItem("toMerch"));
     return (
         <div>
           <meta charSet="utf-8" />
@@ -63,29 +93,29 @@ function Merchant(props) {
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {transactionOffers(0)} 
-              <span className="box" /> {transactionOffers(1)} 
-              <span className="box" /> {transactionOffers(2)} 
+              <span className="box" /> {transactions("offers", 0)} 
+              <span className="box" /> {transactions("offers", 1)} 
+              <span className="box" /> {transactions("offers", 2)} 
             </div>
             {/* header bar */}
             <div>
-              <h>Transaction in progress</h>
+              <h>Transactions in progress</h>
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {JSON.parse(localStorage.getItem("acceptedTransfers"))[0]}
-              <span className="box" /> {JSON.parse(localStorage.getItem("acceptedTransfers"))[1]}
-              <span className="box" /> {JSON.parse(localStorage.getItem("acceptedTransfers"))[2]}
+              <span className="box" /> {transactions("inProgress", 0)} 
+              <span className="box" /> {transactions("inProgress", 1)} 
+              <span className="box" /> {transactions("inProgress", 2)} 
             </div>
             {/* header bar */}
             <div>
-              <h>Completed transaction</h>
+              <h>Completed Transactions</h>
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" />
-              <span className="box" />
-              <span className="box" /> 
+              <span className="box" /> {transactions("doneTran", 0)} 
+              <span className="box" /> {transactions("doneTran", 1)} 
+              <span className="box" /> {transactions("doneTran", 2)} 
             </div>
           </div>
         </div>

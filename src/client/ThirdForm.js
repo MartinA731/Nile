@@ -52,7 +52,8 @@ function ThirdForm() {
       }
     }
     if(index !== -1) {
-      client.accepted = true;
+      client.accepted = "passed";
+      client.address = merchants[index].address;
       merchants[index].value.push(client);
       if(merchants[index].value.length >= 3) {
         merchants[index].full = true;
