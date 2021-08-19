@@ -74,6 +74,21 @@ span.white-button {
     color: black;
 }
 
+span.receivingOff-button {
+  --r: 171;
+  --g: 171;
+  --b: 171;
+  color: purple;
+}
+
+span.receivingOn-button {
+  --r: 235;
+  --g: 133;
+  --b: 35;
+  color: blue;
+}
+
+
 /* contains all the button that are in a row */
 div.btnContainer {
     display: flex;
