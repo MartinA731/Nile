@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import './Client.css';
 
 
 function Boxes(props) {
@@ -15,11 +16,11 @@ function Boxes(props) {
     var noneOrPassed = [], transactionsProg = [], transactionsDone = [];
     for(var i = 0; i < length; i++){
       if(viableClients[i].email === userEmail){
-        if(viableClients[i].accepted === "none") noneOrPassed.push(viableClients[i].description + ": waiting for business");
-        else if(viableClients[i].accepted === "passed") noneOrPassed.push(viableClients[i].description + ": offer sent to merchant: waiting for acceptance");
-        else if(viableClients[i].accepted === "prog") transactionsProg.push(viableClients[i].description + ": offer accepted by merchant, pick up from " + 
+        if(viableClients[i].accepted === "none") noneOrPassed.push("Product " + viableClients[i].description + ": waiting for business");
+        else if(viableClients[i].accepted === "passed") noneOrPassed.push("Product " + viableClients[i].description + ": offer sent to merchant: waiting for acceptance");
+        else if(viableClients[i].accepted === "prog") transactionsProg.push("Product " + viableClients[i].description + ": offer accepted by merchant, pick up from " + 
                                                       viableClients[i].address + " upon delivery");
-        else if(viableClients[i].accepted === "done") transactionsDone.push(viableClients[i].description + ": transaction completed");
+        else if(viableClients[i].accepted === "done") transactionsDone.push("Product " + viableClients[i].description + ": transaction completed");
       }
     }
     var res = {nonePassed : noneOrPassed, prog : transactionsProg, done : transactionsDone}
@@ -34,10 +35,16 @@ function Boxes(props) {
           <h>Pending Transactions</h>
         </div>
         {/* offer bar */}
-        <div className="flex-container"> 
-          <span className="box"/> {allTransactions("nonePassed", 0)} 
-          <span className="box" /> {allTransactions("nonePassed", 1)} 
-          <span className="box" /> {allTransactions("nonePassed", 2)} 
+        <div className="flex-container">
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("nonePassed", 0)}</span>
+          </span>
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("nonePassed", 1)}</span>
+          </span>
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("nonePassed", 2)}</span>
+          </span>
         </div>
         {/* header bar */}
         <div>
@@ -45,9 +52,15 @@ function Boxes(props) {
         </div>
         {/* offer bar */}
         <div className="flex-container">
-          <span className="box" /> {allTransactions("prog", 0)}
-          <span className="box" /> {allTransactions("prog", 1)}
-          <span className="box" /> {allTransactions("prog", 2)}
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("prog", 0)}</span>
+          </span>
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("prog", 1)}</span>
+          </span>
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("prog", 2)}</span>
+          </span>
         </div>
         {/* header bar */}
         <div>
@@ -55,9 +68,15 @@ function Boxes(props) {
         </div>
         {/* offer bar */}
         <div className="flex-container">
-          <span className="box" /> {allTransactions("done", 0)}
-          <span className="box" /> {allTransactions("done", 1)}
-          <span className="box" /> {allTransactions("done", 2)}
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("done", 0)}</span>
+          </span>
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("done", 1)}</span>
+          </span>
+          <span className="box">
+            <span className="text" id="productBox">{allTransactions("done", 2)}</span>
+          </span>
         </div>
       </div>
     </div>

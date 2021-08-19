@@ -15,13 +15,27 @@ function Header(props) {
         title = 'Register'
     }
     function renderAccount() {
-        if(props.location.pathname === '/client' || props.location.pathname === '/merchant') {
+        const URL = props.location.pathname;
+
+        if(URL === '/client' || URL === '/merchant') {
             return(
                 <div className="account" >
                     <span className="avatar">{str[0]}</span>
                     <span>{str}</span>
                     <div className="dropdown">
                         <span className="dropDown-button"onClick={handleSettings}>Settings</span>
+                        <span className="dropDown-button" onClick={handleLogout}>Log Out</span>
+                    </div>
+                </div>
+            )
+        }
+        if(URL === "/Settings") {
+            return(
+                <div className="account">
+                    <span className="avatar">{str[0]}</span>
+                    <span>{str}</span>
+                    <div className="dropdown">
+                        <span className="dropDown-button"onClick={handleBack}>Back</span>
                         <span className="dropDown-button" onClick={handleLogout}>Log Out</span>
                     </div>
                 </div>
@@ -34,7 +48,9 @@ function Header(props) {
     }
     function handleSettings() {
         props.history.push('/Settings')
-        window.location.reload();
+    }
+    function handleBack() {
+        props.history.goBack();
     }
     function handleLogout() {
         window.location.reload(); 

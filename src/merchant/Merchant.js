@@ -44,10 +44,10 @@ function Merchant(props) {
     const possibleReturns = {offers: transactionOffers, inProgress : transactionsProg, doneTran : transactionsDone};
     const returnList = possibleReturns[transactionName];
     if(clientIndex + 1 > returnList.length) return "";
-    else if(transactionName === "offers") var returnValue = "Product: " + returnList[clientIndex] + " click to accept";
-    else if(transactionName === "inProgress") returnValue = "Product: " + returnList[clientIndex] + " click if transaction is over";
-    else if(transactionName === "doneTran") returnValue = "Product: " + returnList[clientIndex] + " transaction is over";
-    return <button type="button" onClick={() => moveForward(thisMerchIndex, clientIndex, transactionName)}> {returnValue} </button>
+    else if(transactionName === "offers") var returnValue = "Product " + returnList[clientIndex] + ": click to accept";
+    else if(transactionName === "inProgress") returnValue = "Product " + returnList[clientIndex] + ": click if order has been picked up by client";
+    else if(transactionName === "doneTran") returnValue = "Product " + returnList[clientIndex] + ": transaction is over ";
+    return <button class="button_cont example_a" rel="nofollow noopener" type="button" id="merchantBox" onClick={() => moveForward(thisMerchIndex, clientIndex, transactionName)}> {returnValue} </button>
   }
   
   const findIndex = (index, transName, thisMerchant) => {
@@ -93,9 +93,15 @@ function Merchant(props) {
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {transactions("offers", 0)} 
-              <span className="box" /> {transactions("offers", 1)} 
-              <span className="box" /> {transactions("offers", 2)} 
+              <span className="box">
+                <span className="text">{transactions("offers", 0)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("offers", 1)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("offers", 2)}</span>
+              </span>
             </div>
             {/* header bar */}
             <div>
@@ -103,9 +109,15 @@ function Merchant(props) {
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {transactions("inProgress", 0)} 
-              <span className="box" /> {transactions("inProgress", 1)} 
-              <span className="box" /> {transactions("inProgress", 2)} 
+              <span className="box">
+                <span className="text">{transactions("inProgress", 0)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("inProgress", 1)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("inProgress", 2)}</span>
+              </span>
             </div>
             {/* header bar */}
             <div>
@@ -113,9 +125,15 @@ function Merchant(props) {
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {transactions("doneTran", 0)} 
-              <span className="box" /> {transactions("doneTran", 1)} 
-              <span className="box" /> {transactions("doneTran", 2)} 
+              <span className="box">
+                <span className="text">{transactions("doneTran", 0)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("doneTran", 1)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("doneTran", 2)}</span>
+              </span>
             </div>
           </div>
         </div>
@@ -123,4 +141,3 @@ function Merchant(props) {
 }
 
 export default withRouter(Merchant);
-
