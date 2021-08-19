@@ -34,10 +34,16 @@ function Boxes(props) {
           <h>Pending Transactions</h>
         </div>
         {/* offer bar */}
-        <div className="flex-container"> 
-          <span className="box"/> {allTransactions("nonePassed", 0)} 
-          <span className="box" /> {allTransactions("nonePassed", 1)} 
-          <span className="box" /> {allTransactions("nonePassed", 2)} 
+        <div className="flex-container">
+          <span className="box">
+            <span className="text">{allTransactions("nonePassed", 0)}</span>
+          </span>
+          <span className="box">
+            <span className="text">{allTransactions("nonePassed", 1)}</span>
+          </span>
+          <span className="box">
+            <span className="text">{allTransactions("nonePassed", 2)}</span>
+          </span>
         </div>
         {/* header bar */}
         <div>
@@ -45,9 +51,15 @@ function Boxes(props) {
         </div>
         {/* offer bar */}
         <div className="flex-container">
-          <span className="box" /> {allTransactions("prog", 0)}
-          <span className="box" /> {allTransactions("prog", 1)}
-          <span className="box" /> {allTransactions("prog", 2)}
+          <span className="box">
+            <span className="text">{allTransactions("prog", 0)}</span>
+          </span>
+          <span className="box">
+            <span className="text">{allTransactions("prog", 1)}</span>
+          </span>
+          <span className="box">
+            <span className="text">{allTransactions("prog", 2)}</span>
+          </span>
         </div>
         {/* header bar */}
         <div>
@@ -55,9 +67,15 @@ function Boxes(props) {
         </div>
         {/* offer bar */}
         <div className="flex-container">
-          <span className="box" /> {allTransactions("done", 0)}
-          <span className="box" /> {allTransactions("done", 1)}
-          <span className="box" /> {allTransactions("done", 2)}
+          <span className="box">
+            <span className="text">{allTransactions("done", 0)}</span>
+          </span>
+          <span className="box">
+            <span className="text">{allTransactions("done", 1)}</span>
+          </span>
+          <span className="box">
+            <span className="text">{allTransactions("done", 2)}</span>
+          </span>
         </div>
       </div>
     </div>
