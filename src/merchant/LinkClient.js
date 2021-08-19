@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Merchant.css';
 import '../common/Button.css';
 import '../common/TopBar.css';
 import { withRouter } from "react-router-dom";
-
-
 
 function changeValue(storageStr, keyChange, newValue, merchEmail) {
   var val = JSON.parse(localStorage.getItem(storageStr));
@@ -32,31 +30,24 @@ function getReceiving(storageStr, keyName, merchEmail) {
 
 
 function LinkClient(props) {
+    const receivingBtn = useRef(null);
     var merchEmail = props.location.state.login;
     
 
     //toggles style of "Receiving on/off" button when clicked
     const toggleBtn = () => {
-        const btn = document.getElementsByClassName("button")[0];
-        if(btn.innerHTML === "Receiving on") {
+      const dom = receivingBtn.current;
+        if(dom.innerHTML === "Receiving on") {
             changeValue("merchants", "accepting", false, merchEmail);
             //change text
-            btn.innerHTML = "Receiving off";
-            //change color
-            btn.style.color = "purple";
-            btn.style.setProperty("--r", 171);
-            btn.style.setProperty("--g", 171);
-            btn.style.setProperty("--b", 171);
+            dom.innerHTML = "Receiving off";
+            dom.classList.replace("receivingOn-button", "receivingOff-button");
         }
         else {
             changeValue("merchants", "accepting", true, merchEmail);
             //change text
-            btn.innerHTML = "Receiving on";
-            //change color
-            btn.style.color = "blue";
-            btn.style.setProperty("--r", 235);
-            btn.style.setProperty("--g", 133);
-            btn.style.setProperty("--b", 35);
+            dom.innerHTML = "Receiving on";
+            dom.classList.replace("receivingOff-button", "receivingOn-button");
         }
     }
   
@@ -77,7 +68,7 @@ function LinkClient(props) {
 
     return (
         <div>
-            <span className="button receiving" onClick={toggleBtn}>{getReceiving("merchants", "accepting", merchEmail)}</span>
+            <span className="receivingOn-button" onClick={toggleBtn} ref={receivingBtn}>{getReceiving("merchants", "accepting", merchEmail)}</span>
         </div>
       );
 }
