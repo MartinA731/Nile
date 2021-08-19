@@ -53,13 +53,18 @@ form {
 }
 
 .flex-container .box {
-  display: inline-block;
-	/* for now set to a ratio to the windows length or height, which ever is larger */
+  position: relative;
 	padding: 15vh 12vw;
 	margin: 2vh 2vw;
 	background-color: white;
 	font-size: 24px;
 	border-radius: 10%;
+}
+
+.box .text {
+  position: absolute;
+  top: 10px;
+  left: 0;
 }
 
 /* BEGINNING OF REQUEST NOW FORM */
