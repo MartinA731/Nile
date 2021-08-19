@@ -93,9 +93,15 @@ function Merchant(props) {
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {transactions("offers", 0)} 
-              <span className="box" /> {transactions("offers", 1)} 
-              <span className="box" /> {transactions("offers", 2)} 
+              <span className="box">
+                <span className="text">{transactions("offers", 0)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("offers", 1)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("offers", 2)}</span>
+              </span>
             </div>
             {/* header bar */}
             <div>
@@ -103,9 +109,15 @@ function Merchant(props) {
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {transactions("inProgress", 0)} 
-              <span className="box" /> {transactions("inProgress", 1)} 
-              <span className="box" /> {transactions("inProgress", 2)} 
+              <span className="box">
+                <span className="text">{transactions("inProgress", 0)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("inProgress", 1)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("inProgress", 2)}</span>
+              </span>
             </div>
             {/* header bar */}
             <div>
@@ -113,9 +125,15 @@ function Merchant(props) {
             </div>
             {/* offer bar */}
             <div className="flex-container">
-              <span className="box" /> {transactions("doneTran", 0)} 
-              <span className="box" /> {transactions("doneTran", 1)} 
-              <span className="box" /> {transactions("doneTran", 2)} 
+              <span className="box">
+                <span className="text">{transactions("doneTran", 0)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("doneTran", 1)}</span>
+              </span>
+              <span className="box">
+                <span className="text">{transactions("doneTran", 2)}</span>
+              </span>
             </div>
           </div>
         </div>
