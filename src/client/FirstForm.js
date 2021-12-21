@@ -71,9 +71,9 @@ function FirstForm(props) {
                 </label>
                 <br />
                 <select type="password" placeholder="Enter Password" name="psw" id="size">
-                    <option value="one">Category 1</option>
-                    <option value="two">Category 2</option>
-                    <option value="three">Category 3</option>
+                    <option value="one">Sports & Outdoors</option>
+                    <option value="two">Home & Kitchen</option>
+                    <option value="three">Other</option>
                 </select>
                 <br />
                 <br />

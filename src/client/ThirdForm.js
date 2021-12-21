@@ -85,8 +85,8 @@ function ThirdForm() {
     window.location.reload();
   };
 
-  const totalCost = "$7.31 for now";
-  const payMethod = "Venmo for now";
+  const totalCost = "$7.31";
+  const payMethod = "Venmo";
   const orderID = Math.floor(Math.random() * Date.now());
   return (
     <div className="form-popup" id="thirdForm">
