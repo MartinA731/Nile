@@ -2,6 +2,7 @@ body {
 	margin: 0px;
 	background-color: #f2f7ff;
 	color: #4472c4;
+  width: 100%;
 }
 
 form {
@@ -10,7 +11,6 @@ form {
   margin: auto;
   position: relative;
  }
-
 
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
@@ -22,11 +22,10 @@ form {
   opacity: 0.8;
   width: 250px;
   position: relative;
-  left: 35%;
+  left: 500px;
   margin-top: 30px;
   margin-bottom: -30px;
 }
-
 
 /* placeholder */
 .placeholder {
@@ -36,7 +35,7 @@ form {
 .placeholder h {
   display: inline-block;
   margin: 10px 0px;
-	font-size: 24px;
+	font-size: 26px;
 }
 
 .placeholder .receiving {
@@ -57,7 +56,7 @@ form {
 	padding: 15vh 12vw;
 	margin: 2vh 2vw;
 	background-color: white;
-	font-size: 24px;
+	font-size: 30px;
 	border-radius: 10%;
 }
 
@@ -67,31 +66,43 @@ form {
   left: 0;
 }
 
+.box .text-2{
+  position: absolute;
+  margin: 2vw;
+  top: 30px;
+  left:0;
+}
+
 /* BEGINNING OF REQUEST NOW FORM */
-
-
 
 /* The popup form - hidden by default */
 .form-popup {
   display: none;
   position: fixed;
-  top: 15%;
-  left: 40%;
+  top: 20%;
+  left: 22.5%;
   z-index: 9;
+  box-shadow: 0 0 0 960px rgba(0,0,0,.3);
+  border-radius: 20px;
 }
 
 /* Add styles to the form container */
 .form-container {
     padding: 15px;
-    background-color: #DDE9FC;
+    background-color: #cdf0fd;
+    color: rgb(7, 78, 119);
+    font-size: 20px;
     text-align: left;
-    border-radius: 5%;
+    border-radius: 20px;
+    width:750px;
+    height:500px;
 }
 
 /* Product Details text input */
 .input-container {
     display: inline-block;
-  }
+    height: auto;
+}
   
 .input-container .hidden {
 height: 0;
@@ -114,7 +125,7 @@ visibility: hidden;
 
 /* css for Category */
 #size {
-	width: 100%;
+	width: 50%;
     padding: 5px;
 	background-color: white;
 	border-radius: 5% / 15%;
@@ -123,18 +134,20 @@ visibility: hidden;
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #04AA6D;
+  background-color: rgb(231, 113, 3);
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
+  width: 22.5%;
+  margin-bottom:20px;
   opacity: 0.8;
+  position: relative;
 }
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
+  margin-left: 10px;
   background-color: red;
 }
 
@@ -149,24 +162,100 @@ visibility: hidden;
 }
 
 h4{
-  text-align: center;
-  margin-bottom:50px;
+  text-align: left;
+  margin-bottom:20px;
 }
 
 #subtitle-space{
-  margin-bottom:10%;
+  margin-bottom:25px;
+  width: 50%;
 }
 
 #nextTwo{
-  margin-top:15%;
+  margin-top:0;
 }
 
 #nextThree{
-  margin-top:43%;
+  margin-top:15%;
+  margin-bottom:17.5%;
 }
 
 #productBox{
-  color : rgb(5, 5, 5);
+  color : #4472c4;
   font-weight: bold;
-  font-family: "Times New Roman", Times, serif;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  top:20px;
+  text-align: left;
+}
+
+#productBox-2{
+  color: grey;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:20px;
+  text-align: left;
+}
+
+/*.*/
+
+#datePicker{
+  width: 25%;
+}
+
+.share-location{
+  margin-top: 1.5%;
+  margin-right: 79%;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 45%;
+  width: auto;
+  padding: 16px;
+  color: rgb(44, 111, 143);
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 5%;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev {
+  left: 5%;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.flex-container .box1{
+  position: relative;
+	padding: 15vh 12vw;
+	margin: 2vh 2vw;
+	background-color: white;
+	font-size: 30px;
+	border-radius: 10%;
+}
+
+.box1 .text{
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
+
+.box1 .text-2{
+  position: absolute;
+  margin: 2vw;
+  top: 30px;
+  left:0;
 }
