@@ -30,7 +30,7 @@ const Location = () => {
 
   return (
     <div className="App">
-      <button type="button" onClick={getLocation}>Share Location</button>
+      <button type="button" onClick={getLocation} className = "share-location">Share Location</button>
       <p>{status}</p>
       {lat && <p>Latitude: {lat}</p>}
       {lng && <p>Longitude: {lng}</p>}
