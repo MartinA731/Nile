@@ -7,7 +7,7 @@ function TableDatePicker() {
  const [date, setDate] = useState(new Date());
  
  return (
-   <DatePicker className="date" selected={date} onChange={date => setDate(date)} />
+   <DatePicker className="date" id = "datePicker" selected={date} onChange={date => setDate(date)} />
  );
 }
 
