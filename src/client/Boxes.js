@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import './Client.css';
 
 function allTransactions(userEmail){ 
+
   // localStorage.getcurrentPurchase("toMerch"), returns array of data that [{accepted: true, email: str, description: str, address: str }, {}, {}, {}]
   // localstorage.getcurrentPurchase("") returns a string
 
@@ -26,71 +27,111 @@ function allTransactions(userEmail){
   var res = {nonePassed : noneOrPassed, prog : transactionsProg, done : transactionsDone};
   if(!res) return "";
   return res;
+  
 }
-
 
 function Boxes(props) {
 
   const userEmail = props.location.state.login;
 
-  // The SlideShow for Pending Transactions // 
+  // The slide scroller for Pending Transactions // 
 
   var noneOrPassedres = allTransactions(userEmail)["nonePassed"];
 
   const[noneOrPassedPurchases, setnoneOrPassedPurchases] = useState([]);
   const[currentNonePurchase, setCurrentNonePurchase] = useState("");
-  const[previousNonePurchase, setPreviousNonePurchase] = useState("");
-  const[nextNonePurchase, setNextNonePurchase] = useState("");
-  const[currentNoneIndex, setCurrent] = useState(0);
+  const[currentNoneIndex, setCurrentNoneIndex] = useState(0);
 
   useEffect(() => {
     setnoneOrPassedPurchases(noneOrPassedres);
     setCurrentNonePurchase(noneOrPassedres[currentNoneIndex]);
-    if (currentNoneIndex > 1){
-      setPreviousNonePurchase(noneOrPassedres[currentNoneIndex - 1]);
-    }
-    else if (/* currentNoneIndex == 0 ||  */noneOrPassedPurchases.length <= 2){
-      setPreviousNonePurchase("");
-    }
-    else{
-      setPreviousNonePurchase(noneOrPassedres[noneOrPassedres.length - 1]);
-    }
-    if (currentNoneIndex === noneOrPassedres.length - 1){
-      setNextNonePurchase(noneOrPassedres[0]);
-    }
-    else if (currentNoneIndex == 0 && noneOrPassedPurchases.length == 1){
-      setNextNonePurchase("");
-    }
-    else{
-      setNextNonePurchase(noneOrPassedres[currentNoneIndex + 1]);
-    }
   }, [currentNoneIndex]);
 
   function previousNoneSlide(){
-    if (noneOrPassedPurchases.length > 3){
-      if (currentNoneIndex > 0){
-        setCurrent(currentNoneIndex - 1);
-      }
-      else{
-        setCurrent(noneOrPassedPurchases.length - 1);
-      }
+    if (currentNoneIndex > 0){
+      setCurrentNoneIndex(currentNoneIndex - 1);
+    }
+    else{
+      setCurrentNoneIndex(noneOrPassedPurchases.length - 1);
     }
   }
 
   function nextNoneSlide(){
-    if (noneOrPassedPurchases.length > 3){
-      if (currentNoneIndex === noneOrPassedPurchases.length - 1){
-        setCurrent(0);
-      }
-      else{
-        setCurrent(currentNoneIndex + 1);
-      }
+    if (currentNoneIndex === noneOrPassedPurchases.length - 1){
+      setCurrentNoneIndex(0);
+    }
+    else{
+      setCurrentNoneIndex(currentNoneIndex + 1);
     }
   }
   
-  // The SlideShow for Transactions in Progress // 
+  // The side scroller for Transactions in Progress // 
 
-  // The SlideShow for finished Transactions // 
+  var transactionsProgres = allTransactions(userEmail)["prog"];
+
+  transactionsProgres = ["placeholder1", "placeholder2", "placeholder3", "placeholder4", "placeholder5"];
+
+  const[transactionsProgPurchases, settransactionsProgPurchases] = useState([]);
+  const[currentProgPurchase, setCurrentProgPurchase] = useState("");
+  const[currentProgIndex, setCurrentProgIndex] = useState(0);
+
+  useEffect(() => {
+    settransactionsProgPurchases(transactionsProgres);
+    setCurrentProgPurchase(transactionsProgres[currentProgIndex]);
+  }, [currentProgIndex]);
+
+  function previousProgSlide(){
+    if (currentProgIndex > 0){
+      setCurrentProgIndex(currentProgIndex - 1);
+    }
+    else{
+      setCurrentProgIndex(transactionsProgPurchases.length - 1);
+    }
+  }
+
+  function nextProgSlide(){
+    if (currentProgIndex === transactionsProgPurchases.length - 1){
+      setCurrentProgIndex(0);
+    }
+    else{
+      setCurrentProgIndex(currentProgIndex + 1);
+    }
+  }
+
+  // The side scroller for finished Transactions // 
+
+  var finishedTransactions = allTransactions(userEmail)["done"];
+
+  finishedTransactions = ["placeholder1", "placeholder2", "placeholder3", "placeholder4", "placeholder5"];
+
+  const[completedPurchases, setCompletedPurchases] = useState([]);
+  const[currentCompletedPurchase, setCurrentCompletedPurchase] = useState("");
+  const[currentCompletedIndex, setCurrentCompletedIndex] = useState(0);
+
+  useEffect(() => {
+    setCompletedPurchases(finishedTransactions);
+    setCurrentCompletedPurchase(finishedTransactions[currentCompletedIndex]);
+  }, [currentCompletedIndex]);
+
+  function previousCompletedSlide(){
+    if (currentCompletedIndex > 0){
+      setCurrentCompletedIndex(currentCompletedIndex - 1);
+    }
+    else{
+      setCurrentCompletedIndex(completedPurchases.length - 1);
+    }
+  }
+
+  function nextCompletedSlide(){
+    if (currentCompletedIndex === completedPurchases.length - 1){
+      setCurrentCompletedIndex(0);
+    }
+    else{
+      setCurrentCompletedIndex(currentCompletedIndex + 1);
+    }
+  }
+
+  /////
 
   return (
     <div className="placeholder">
@@ -101,21 +142,40 @@ function Boxes(props) {
         </div>
         {/* offer bar */}
         <div className="flex-container">
-          <span className="box1">
-            <span className = "text" id= "productBox">{previousNonePurchase}</span> 
-          </span>   
-          <span className="box1">
+          <span className="box">
             <span className = "text" id= "productBox">{currentNonePurchase}</span> 
-          </span>        
-          <span className="box1">
-            <span className = "text" id= "productBox">{nextNonePurchase}</span> 
-          </span>     
+          </span>         
           <a class="prev" onClick = {previousNoneSlide}>&#10094;</a>
-          <a class="next" onClick= {nextNoneSlide}>&#10095;</a>
+          <a class="next" onClick = {nextNoneSlide}>&#10095;</a>
         </div>
+        {/* header bar */}
+        <div>
+          <h>Transactions in Progress</h>
+        </div>
+        {/* offer bar */}
+        <div className="flex-container">
+          <span className="box">
+            <span className = "text" id= "productBox">{currentProgPurchase}</span> 
+          </span>         
+        </div>
+        <a class="prev2" onClick = {previousProgSlide}>&#10094;</a>
+        <a class="next2" onClick = {nextProgSlide}>&#10095;</a>
+        {/* header bar */}
+        <div>
+          <h>Completed Transactions</h>
+        </div>
+        {/* offer bar */}
+        <div className="flex-container">
+          <span className="box">
+            <span className = "text" id= "productBox">{currentCompletedPurchase}</span> 
+          </span> 
+        </div>  
+        <a class="prev3" onClick = {previousCompletedSlide}>&#10094;</a>
+        <a class="next3" onClick = {nextCompletedSlide}>&#10095;</a>      
       </div>
     </div>
   );
+  
 }
 
 export default withRouter(Boxes);
