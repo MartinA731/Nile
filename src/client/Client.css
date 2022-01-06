@@ -208,7 +208,7 @@ h4{
 }
 
 /* Next & previous buttons */
-.prev, .next {
+.prev, .next, .prev2, .next2, .prev3, .next3 {
   cursor: pointer;
   position: absolute;
   top: 45%;
@@ -222,40 +222,27 @@ h4{
   user-select: none;
 }
 
+.prev2, .next2 {
+  top: 85%;
+}
+
+.prev3, .next3{
+  top: 960px;
+}
+
+
 /* Position the "next button" to the right */
-.next {
+.next, .next2, .next3 {
   right: 5%;
   border-radius: 3px 0 0 3px;
 }
 
-.prev {
+.prev, .prev2, .prev3 {
   left: 5%;
   border-radius: 3px 0 0 3px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
+.prev:hover, .next:hover, .prev2:hover, .next2:hover, .prev3:hover, .next3:hover {
   background-color: rgba(0,0,0,0.8);
-}
-
-.flex-container .box1{
-  position: relative;
-	padding: 15vh 12vw;
-	margin: 2vh 2vw;
-	background-color: white;
-	font-size: 30px;
-	border-radius: 10%;
-}
-
-.box1 .text{
-  position: absolute;
-  top: 10px;
-  left: 0;
-}
-
-.box1 .text-2{
-  position: absolute;
-  margin: 2vw;
-  top: 30px;
-  left:0;
 }
