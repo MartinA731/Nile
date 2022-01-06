@@ -101,6 +101,7 @@ function ThirdForm() {
             <p> <font color={"grey"}> Payment Method: {payMethod} </font> </p>
             <p> <font color={"grey"}> Order ID: {orderID} </font> </p>
         </label>
+        <br />
         <button type="button" className="btn" id="nextThree" onClick={submitClient}>
           Submit
         </button>
