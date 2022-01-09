@@ -38,62 +38,60 @@ function Boxes(props) {
 
   var noneOrPassedres = allTransactions(userEmail)["nonePassed"];
 
-  const[noneOrPassedPurchases, setnoneOrPassedPurchases] = useState([]);
   const[currentNonePurchase, setCurrentNonePurchase] = useState("");
+  const[nextNonePurchase, setNextNonePurchase] = useState("");
+  const[nextNextNonePurchase, setNextNextNonePurchase] = useState("");
   const[currentNoneIndex, setCurrentNoneIndex] = useState(0);
 
   useEffect(() => {
-    setnoneOrPassedPurchases(noneOrPassedres);
     setCurrentNonePurchase(noneOrPassedres[currentNoneIndex]);
+    if (noneOrPassedres.length >= 2) {
+      setNextNonePurchase(noneOrPassedres[currentNoneIndex + 1]);
+    }
+    if (noneOrPassedres.length >= 3) {
+      setNextNextNonePurchase(noneOrPassedres[currentNoneIndex + 2]);
+    }
   }, [currentNoneIndex]);
 
   function previousNoneSlide(){
-    if (currentNoneIndex > 0){
+    if (noneOrPassedres.length >= 3 && currentNoneIndex > 0){
       setCurrentNoneIndex(currentNoneIndex - 1);
-    }
-    else{
-      setCurrentNoneIndex(noneOrPassedPurchases.length - 1);
     }
   }
 
   function nextNoneSlide(){
-    if (currentNoneIndex === noneOrPassedPurchases.length - 1){
-      setCurrentNoneIndex(0);
-    }
-    else{
+    if (noneOrPassedres.length >= 3 && currentNoneIndex < noneOrPassedres.length - 3){
       setCurrentNoneIndex(currentNoneIndex + 1);
     }
   }
-  
+
   // The side scroller for Transactions in Progress // 
 
   var transactionsProgres = allTransactions(userEmail)["prog"];
 
-  transactionsProgres = ["placeholder1", "placeholder2", "placeholder3", "placeholder4", "placeholder5"];
-
-  const[transactionsProgPurchases, settransactionsProgPurchases] = useState([]);
   const[currentProgPurchase, setCurrentProgPurchase] = useState("");
+  const[nextProgPurchase, setNextProgPurchase] = useState("");
+  const[nextNextProgPurchase, setNextNextProgPurchase] = useState("");
   const[currentProgIndex, setCurrentProgIndex] = useState(0);
 
   useEffect(() => {
-    settransactionsProgPurchases(transactionsProgres);
     setCurrentProgPurchase(transactionsProgres[currentProgIndex]);
+    if (transactionsProgres.length >= 2) {
+      setNextProgPurchase(transactionsProgres[currentProgIndex + 1]);
+    }
+    if (transactionsProgres.length >= 3) {
+      setNextNextProgPurchase(transactionsProgres[currentProgIndex + 2]);
+    }
   }, [currentProgIndex]);
 
   function previousProgSlide(){
-    if (currentProgIndex > 0){
+    if (transactionsProgres.length >= 3 && currentProgIndex > 0){
       setCurrentProgIndex(currentProgIndex - 1);
-    }
-    else{
-      setCurrentProgIndex(transactionsProgPurchases.length - 1);
     }
   }
 
   function nextProgSlide(){
-    if (currentProgIndex === transactionsProgPurchases.length - 1){
-      setCurrentProgIndex(0);
-    }
-    else{
+    if (transactionsProgres.length >= 3 && currentProgIndex < transactionsProgres.length - 3){
       setCurrentProgIndex(currentProgIndex + 1);
     }
   }
@@ -102,36 +100,34 @@ function Boxes(props) {
 
   var finishedTransactions = allTransactions(userEmail)["done"];
 
-  finishedTransactions = ["placeholder1", "placeholder2", "placeholder3", "placeholder4", "placeholder5"];
-
-  const[completedPurchases, setCompletedPurchases] = useState([]);
   const[currentCompletedPurchase, setCurrentCompletedPurchase] = useState("");
+  const[nextCompletedPurchase, setNextCompletedPurchase] = useState("");
+  const[nextNextCompletedPurchase, setNextNextCompletedPurchase] = useState("");
   const[currentCompletedIndex, setCurrentCompletedIndex] = useState(0);
 
   useEffect(() => {
-    setCompletedPurchases(finishedTransactions);
     setCurrentCompletedPurchase(finishedTransactions[currentCompletedIndex]);
+    if (finishedTransactions.length >= 2) {
+      setNextCompletedPurchase(finishedTransactions[currentCompletedIndex + 1]);
+    }
+    if (finishedTransactions.length >= 3) {
+      setNextNextCompletedPurchase(finishedTransactions[currentCompletedIndex + 2]);
+    }
   }, [currentCompletedIndex]);
 
   function previousCompletedSlide(){
-    if (currentCompletedIndex > 0){
+    if (finishedTransactions.length >= 3 && currentCompletedIndex > 0){
       setCurrentCompletedIndex(currentCompletedIndex - 1);
-    }
-    else{
-      setCurrentCompletedIndex(completedPurchases.length - 1);
     }
   }
 
   function nextCompletedSlide(){
-    if (currentCompletedIndex === completedPurchases.length - 1){
-      setCurrentCompletedIndex(0);
-    }
-    else{
+    if (finishedTransactions.length >= 3 && currentCompletedIndex < finishedTransactions.length - 3){
       setCurrentCompletedIndex(currentCompletedIndex + 1);
     }
   }
 
-  /////
+  /////////
 
   return (
     <div className="placeholder">
@@ -143,10 +139,16 @@ function Boxes(props) {
         {/* offer bar */}
         <div className="flex-container">
           <span className="box">
-            <span className = "text" id= "productBox">{currentNonePurchase}</span> 
+            <span className = "text fadeIn" id= "productBox">{currentNonePurchase}</span> 
           </span>         
-          <a class="prev" onClick = {previousNoneSlide}>&#10094;</a>
-          <a class="next" onClick = {nextNoneSlide}>&#10095;</a>
+          <span className="box">
+            <span className = "text fadeIn" id= "productBox">{nextNonePurchase}</span> 
+          </span>
+          <span className="box">
+            <span className = "text fadeIn" id= "productBox">{nextNextNonePurchase}</span> 
+          </span>
+          <a className="prev" onClick = {previousNoneSlide}>&#10094;</a>
+          <a className="next" onClick = {nextNoneSlide}>&#10095;</a>
         </div>
         {/* header bar */}
         <div>
@@ -156,10 +158,16 @@ function Boxes(props) {
         <div className="flex-container">
           <span className="box">
             <span className = "text" id= "productBox">{currentProgPurchase}</span> 
-          </span>         
+          </span>     
+          <span className="box">
+            <span className = "text" id= "productBox">{nextProgPurchase}</span> 
+          </span>  
+          <span className="box">
+            <span className = "text" id= "productBox">{nextNextProgPurchase}</span> 
+          </span>      
         </div>
-        <a class="prev2" onClick = {previousProgSlide}>&#10094;</a>
-        <a class="next2" onClick = {nextProgSlide}>&#10095;</a>
+        <a className="prev2" onClick = {previousProgSlide}>&#10094;</a>
+        <a className="next2" onClick = {nextProgSlide}>&#10095;</a>
         {/* header bar */}
         <div>
           <h>Completed Transactions</h>
@@ -169,13 +177,19 @@ function Boxes(props) {
           <span className="box">
             <span className = "text" id= "productBox">{currentCompletedPurchase}</span> 
           </span> 
+          <span className="box">
+            <span className = "text" id= "productBox">{nextCompletedPurchase}</span> 
+          </span> 
+          <span className="box">
+            <span className = "text" id= "productBox">{nextNextCompletedPurchase}</span> 
+          </span> 
         </div>  
-        <a class="prev3" onClick = {previousCompletedSlide}>&#10094;</a>
-        <a class="next3" onClick = {nextCompletedSlide}>&#10095;</a>      
+        <a className="prev3" onClick = {previousCompletedSlide}>&#10094;</a>
+        <a className="next3" onClick = {nextCompletedSlide}>&#10095;</a>      
       </div>
     </div>
   );
-  
+
 }
 
 export default withRouter(Boxes);
