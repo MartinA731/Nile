@@ -196,7 +196,7 @@ h4{
   text-align: left;
 }
 
-/*.*/
+/*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*//*.*/
 
 #datePicker{
   width: 25%;
@@ -230,7 +230,6 @@ h4{
   top: 960px;
 }
 
-
 /* Position the "next button" to the right */
 .next, .next2, .next3 {
   right: 5%;
@@ -245,4 +244,22 @@ h4{
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover, .prev2:hover, .next2:hover, .prev3:hover, .next3:hover {
   background-color: rgba(0,0,0,0.8);
+}
+
+/* Fading animation */
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fadeIn;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: .4}
+  to {opacity: 1}
 }
