@@ -35,12 +35,11 @@ const Location = () => {
       <p>{status}</p>
       {lat && <p className="share-location">Latitude: {lat}</p>}
       {lng && <p className="share-location">Longitude: {lng}</p>}
-      <MapContainer></MapContainer>
+      <MapContainer dataFromParentLat = {lat} dataFromParentLng = {lng}></MapContainer>
     </div>
   );
 }
 
 export default Location;
-
 
 
