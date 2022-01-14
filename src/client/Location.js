@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import MapContainer from './Map'
 
 const Location = () => {
   const [lat, setLat] = useState(null);
@@ -30,10 +31,11 @@ const Location = () => {
 
   return (
     <div className="App">
-      <button type="button" onClick={getLocation} className = "share-location">Share Location</button>
+      <button type="button" onClick={getLocation} className="share-location">Share Location</button>
       <p>{status}</p>
-      {lat && <p>Latitude: {lat}</p>}
-      {lng && <p>Longitude: {lng}</p>}
+      {lat && <p className="share-location">Latitude: {lat}</p>}
+      {lng && <p className="share-location">Longitude: {lng}</p>}
+      <MapContainer></MapContainer>
     </div>
   );
 }
