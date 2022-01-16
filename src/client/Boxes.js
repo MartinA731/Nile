@@ -1,6 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { withRouter } from "react-router-dom";
 import './Client.css';
+
+// Carousel Package: https://www.npmjs.com/package/react-responsive-carousel
+import Carousel from 'react-elastic-carousel';
 
 function allTransactions(userEmail){ 
 
@@ -34,121 +37,62 @@ function Boxes(props) {
 
   const userEmail = props.location.state.login;
 
-  // The slide scroller for Pending Transactions // 
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2 },
+    { width: 768, itemsToShow: 3 },
+    { width: 1200, itemsToShow: 4 }
+  ];
 
+  // The side scroller for pending transactions // 
+ 
   var noneOrPassedres = allTransactions(userEmail)["nonePassed"];
 
-  const[currentNonePurchase, setCurrentNonePurchase] = useState("");
-  const[nextNonePurchase, setNextNonePurchase] = useState("");
-  const[nextNextNonePurchase, setNextNextNonePurchase] = useState("");
-  const[currentNoneIndex, setCurrentNoneIndex] = useState(0);
+  var noneArray = [];
 
-  useEffect(() => {
-    setCurrentNonePurchase(noneOrPassedres[currentNoneIndex]);
-    if (noneOrPassedres.length >= 2) {
-      setNextNonePurchase(noneOrPassedres[currentNoneIndex + 1]);
-    }
-    if (noneOrPassedres.length >= 3) {
-      setNextNextNonePurchase(noneOrPassedres[currentNoneIndex + 2]);
-    }
-  }, [currentNoneIndex]);
-
-  function previousNoneSlide(){
-    if (noneOrPassedres.length >= 3 && currentNoneIndex > 0){
-      setCurrentNoneIndex(currentNoneIndex - 1);
-    }
+  for (let i = 0; i < noneOrPassedres.length; i++) {
+    noneArray.push(<span className="box">
+    <span className="text fadeIn" id= "productBox">{noneOrPassedres[i]}</span> 
+  </span>);
   }
 
-  function nextNoneSlide(){
-    if (noneOrPassedres.length >= 3 && currentNoneIndex < noneOrPassedres.length - 3){
-      setCurrentNoneIndex(currentNoneIndex + 1);
-    }
-  }
-
-  // The side scroller for Transactions in Progress // 
+  // The side scroller for transactions in progress // 
 
   var transactionsProgres = allTransactions(userEmail)["prog"];
 
-  const[currentProgPurchase, setCurrentProgPurchase] = useState("");
-  const[nextProgPurchase, setNextProgPurchase] = useState("");
-  const[nextNextProgPurchase, setNextNextProgPurchase] = useState("");
-  const[currentProgIndex, setCurrentProgIndex] = useState(0);
+  var progArray = [];
 
-  useEffect(() => {
-    setCurrentProgPurchase(transactionsProgres[currentProgIndex]);
-    if (transactionsProgres.length >= 2) {
-      setNextProgPurchase(transactionsProgres[currentProgIndex + 1]);
-    }
-    if (transactionsProgres.length >= 3) {
-      setNextNextProgPurchase(transactionsProgres[currentProgIndex + 2]);
-    }
-  }, [currentProgIndex]);
+  for (let i = 0; i < transactionsProgres.length; i++) {
+    progArray.push(<span className="box">
+    <span className="text fadeIn" id= "productBox">{transactionsProgres[i]}</span> 
+  </span>);
+  } 
 
-  function previousProgSlide(){
-    if (transactionsProgres.length >= 3 && currentProgIndex > 0){
-      setCurrentProgIndex(currentProgIndex - 1);
-    }
-  }
-
-  function nextProgSlide(){
-    if (transactionsProgres.length >= 3 && currentProgIndex < transactionsProgres.length - 3){
-      setCurrentProgIndex(currentProgIndex + 1);
-    }
-  }
-
-  // The side scroller for finished Transactions // 
+  // The side scroller for finished transactions // 
 
   var finishedTransactions = allTransactions(userEmail)["done"];
 
-  const[currentCompletedPurchase, setCurrentCompletedPurchase] = useState("");
-  const[nextCompletedPurchase, setNextCompletedPurchase] = useState("");
-  const[nextNextCompletedPurchase, setNextNextCompletedPurchase] = useState("");
-  const[currentCompletedIndex, setCurrentCompletedIndex] = useState(0);
+  var finishedArray = [];
 
-  useEffect(() => {
-    setCurrentCompletedPurchase(finishedTransactions[currentCompletedIndex]);
-    if (finishedTransactions.length >= 2) {
-      setNextCompletedPurchase(finishedTransactions[currentCompletedIndex + 1]);
-    }
-    if (finishedTransactions.length >= 3) {
-      setNextNextCompletedPurchase(finishedTransactions[currentCompletedIndex + 2]);
-    }
-  }, [currentCompletedIndex]);
-
-  function previousCompletedSlide(){
-    if (finishedTransactions.length >= 3 && currentCompletedIndex > 0){
-      setCurrentCompletedIndex(currentCompletedIndex - 1);
-    }
-  }
-
-  function nextCompletedSlide(){
-    if (finishedTransactions.length >= 3 && currentCompletedIndex < finishedTransactions.length - 3){
-      setCurrentCompletedIndex(currentCompletedIndex + 1);
-    }
-  }
-
-  /////////
+  for (let i = 0; i < finishedTransactions.length; i++) {
+    finishedArray.push(<span className="box">
+    <span className="text fadeIn" id= "productBox">{finishedTransactions[i]}</span> 
+  </span>);
+  } 
 
   return (
     <div className="placeholder">
-      <div className="placeholder">
         {/* header bar */}
         <div>
           <h>Pending Transactions</h>
         </div>
         {/* offer bar */}
-        <div className="flex-container">
-          <span className="box">
-            <span className = "text fadeIn" id= "productBox">{currentNonePurchase}</span> 
-          </span>         
-          <span className="box">
-            <span className = "text fadeIn" id= "productBox">{nextNonePurchase}</span> 
-          </span>
-          <span className="box">
-            <span className = "text fadeIn" id= "productBox">{nextNextNonePurchase}</span> 
-          </span>
-          <a className="prev" onClick = {previousNoneSlide}>&#10094;</a>
-          <a className="next" onClick = {nextNoneSlide}>&#10095;</a>
+        <div className="flex-container"> 
+          <Carousel breakPoints={breakPoints}>
+            {noneArray.map((transaction) => {
+                return transaction;
+              })}
+          </Carousel>
         </div>
         {/* header bar */}
         <div>
@@ -156,37 +100,24 @@ function Boxes(props) {
         </div>
         {/* offer bar */}
         <div className="flex-container">
-          <span className="box">
-            <span className = "text" id= "productBox">{currentProgPurchase}</span> 
-          </span>     
-          <span className="box">
-            <span className = "text" id= "productBox">{nextProgPurchase}</span> 
-          </span>  
-          <span className="box">
-            <span className = "text" id= "productBox">{nextNextProgPurchase}</span> 
-          </span>      
+          <Carousel breakPoints={breakPoints}>
+            {progArray.map((transaction) => {
+                return transaction;
+              })}
+          </Carousel>   
         </div>
-        <a className="prev2" onClick = {previousProgSlide}>&#10094;</a>
-        <a className="next2" onClick = {nextProgSlide}>&#10095;</a>
         {/* header bar */}
         <div>
           <h>Completed Transactions</h>
         </div>
         {/* offer bar */}
         <div className="flex-container">
-          <span className="box">
-            <span className = "text" id= "productBox">{currentCompletedPurchase}</span> 
-          </span> 
-          <span className="box">
-            <span className = "text" id= "productBox">{nextCompletedPurchase}</span> 
-          </span> 
-          <span className="box">
-            <span className = "text" id= "productBox">{nextNextCompletedPurchase}</span> 
-          </span> 
+          <Carousel breakPoints={breakPoints}>
+            {finishedArray.map((transaction) => {
+                return transaction;
+              })}
+          </Carousel>   
         </div>  
-        <a className="prev3" onClick = {previousCompletedSlide}>&#10094;</a>
-        <a className="next3" onClick = {nextCompletedSlide}>&#10095;</a>      
-      </div>
     </div>
   );
 
