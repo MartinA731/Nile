@@ -1,8 +1,6 @@
 import React from "react";
 import TableDatePicker from "./dateSelect";
-import Location from "./Location";
-
-
+import Location from './Location';
 
 class SecondForm extends React.Component {
   constructor(props) {
@@ -25,11 +23,11 @@ class SecondForm extends React.Component {
   return (
     <div className="form-popup" id="secondForm">
       <form action="/action_page.php" className="form-container">
-        <h4>Request Address</h4>
+        <h4 id="request-address">Request Address</h4>
         <label>
           <b>Location</b>
         </label> <br />
-        <Location></Location> 
+        <Location></Location>
         <label>
           <b>Estimated Delivery Date</b>
         </label>  <br />
@@ -37,6 +35,7 @@ class SecondForm extends React.Component {
         <button type="button" className="btn" id="nextTwo" onClick={openThirdForm}>
           Next
         </button>
+        <br />
         <button type="button" className="btn cancel" onClick={closeSecondForm}>
           Close
         </button>
