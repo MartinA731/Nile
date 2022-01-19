@@ -3,9 +3,12 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { withRouter } from "react-router-dom";
 
 const mapStyles = {
-  width: '50%',
-  height: '50%',
+  width: '40%',
+  height: '40%',
+  left: '32%',
+  top:  '-8%'
 };
+
 
 
 class MapContainer extends Component {
