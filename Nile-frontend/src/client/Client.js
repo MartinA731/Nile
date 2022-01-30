@@ -20,7 +20,7 @@ class Client extends React.Component {
     render() {
     return(
         <div>
-          {/* Request now button */}
+          {/* Request now button   */}
           <RequestNow></RequestNow> 
 
           {/* Boxes in middle */}
